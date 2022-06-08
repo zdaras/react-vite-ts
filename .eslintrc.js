@@ -31,11 +31,6 @@ module.exports = {
 		'import/resolver': {
 			typescript: {}
 		}
-		// 'import/resolver': {
-		// 	webpack: {
-		// 		config: './config/webpack.dev.ts'
-		// 	}
-		// }
 	},
 	rules: {
 		'@typescript-eslint/adjacent-overload-signatures': 'error',
