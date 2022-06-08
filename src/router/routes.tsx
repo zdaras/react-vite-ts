@@ -47,6 +47,13 @@ export const routes: IRoute[] = [
 		AuthCheck: SkipAuthCheck
 	},
 	{
+		path: '/private',
+		showInMenu: false,
+		Component: Dashboard,
+		Layout: MainLayout,
+		AuthCheck: PrivateRoute
+	},
+	{
 		path: '*',
 		Component: NotFound,
 		Layout: MainLayout,

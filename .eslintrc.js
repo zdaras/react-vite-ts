@@ -1,11 +1,11 @@
 module.exports = {
+	root: true,
 	env: {
 		browser: true,
 		node: true,
 		es6: true
 	},
 	parser: '@typescript-eslint/parser',
-	files: ['*.ts', '*.tsx'],
 	parserOptions: {
 		ecmaVersion: 2018,
 		project: './tsconfig.json',
@@ -250,6 +250,8 @@ module.exports = {
 		'default-param-last': 0,
 		'react/require-default-props': 0,
 		'import/no-import-module-exports': 0,
-		'react/function-component-definition': 0
+		'react/function-component-definition': 0,
+		'react/react-in-jsx-scope': 'off',
+		'react/jsx-no-useless-fragment': 'off'
 	}
 };

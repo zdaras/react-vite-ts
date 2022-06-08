@@ -4,7 +4,7 @@ const useEffectOnce = (effect: () => any | (() => any)) => {
 	const destroyFunc = useRef<void | (() => void)>();
 	const effectCalled = useRef(false);
 	const renderAfterCalled = useRef(false);
-	const [val, setVal] = useState<number>(0);
+	const [, setVal] = useState<number>(0);
 
 	if (effectCalled.current) {
 		renderAfterCalled.current = true;
@@ -16,7 +16,7 @@ const useEffectOnce = (effect: () => any | (() => any)) => {
 			effectCalled.current = true;
 		}
 
-		setVal(val => val + 1);
+		setVal(prev => prev + 1);
 
 		return () => {
 			if (!renderAfterCalled.current) {
