@@ -12,26 +12,30 @@ export const WrapperStyled = styled.section`
 export const RouteWrapperStyled = styled.div`
 	height: 100%;
 	position: relative;
-	padding: 0 15px;
+	padding: 0 44px;
 
 	@media ${responsive.sm} {
-		padding: 0 44px;
+		padding: 0 15px;
 	}
 `;
 
-export const Container = styled.div<{ maxWidth?: string }>`
-	padding: 0 10px;
+export const Container = styled.div<{ maxWidth?: string; height?: string }>`
+	padding: 0 14.5%;
+	height: ${({ height }) => height || 'auto'};
 
-	@media ${responsive.md} {
+	@media ${responsive.xxl} {
+		padding: 0;
+		max-width: ${({ theme }) => theme.MAX_CONTAINER_WIDTH};
+		margin: 0 auto;
+		width: 100%;
+	}
+
+	@media ${responsive.lp} {
 		padding: 0 5%;
 	}
 
-	@media ${responsive.lg} {
-		padding: 0 10%;
-	}
-
-	@media ${responsive.xl} {
-		padding: 0 14.5%;
+	@media ${responsive.sm} {
+		padding: 0 10px;
 	}
 
 	${({ maxWidth }) =>
@@ -42,22 +46,14 @@ export const Container = styled.div<{ maxWidth?: string }>`
 `;
 
 export const TopPanelStyled = styled.div`
-	height: 116px;
+	height: 114px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 15px 0;
+	padding: 44px 0;
 
 	@media ${responsive.sm} {
-		padding: 44px 0;
-	}
-
-	@media ${responsive.lg} {
-		height: 127px;
-	}
-
-	@media ${responsive.xl} {
-		height: 150px;
+		padding: 15px 0;
 	}
 `;
 
@@ -74,12 +70,8 @@ export const BlockStyled = styled.div<IBlockStyled>`
 	background: ${props => props.theme.BLOCK_BG};
 	position: relative;
 	height: ${props => props.height || '100%'};
-	padding: ${props => props.padding || props.theme.BLOCK_PADDING_XS};
+	padding: ${props => props.padding || props.theme.BLOCK_PADDING};
 	border-radius: 1rem;
-
-	&.transaction-block {
-		overflow: hidden;
-	}
 
 	@media ${responsive.sm} {
 		padding: ${props => props.padding || props.theme.BLOCK_PADDING_SM};
@@ -89,22 +81,22 @@ export const BlockStyled = styled.div<IBlockStyled>`
 	${({ formPadding }) =>
 		formPadding &&
 		css`
-			@media ${responsive.sm} {
-				padding: 60px 86px;
-			}
+			padding: 60px 86px;
 
-			padding: 30px;
+			@media ${responsive.sm} {
+				padding: 30px;
+			}
 		`}
 `;
 
 export const H1 = styled.h1<IH>`
-	font-size: 1.5rem;
+	font-size: 2.5rem;
 	line-height: 2.6rem;
 	letter-spacing: 0.3px;
 	margin: 0.67em 0;
 
 	@media ${responsive.sm} {
-		font-size: 2.5rem;
+		font-size: 1.5rem;
 	}
 
 	${({ margin }) =>
@@ -127,14 +119,14 @@ export const H1 = styled.h1<IH>`
 `;
 
 export const H2 = styled.h2<IH>`
-	font-size: 1.25rem;
+	font-size: 2.25rem;
 	line-height: 2.6875rem;
 	letter-spacing: 0.8px;
 	font-weight: 600;
 	font-family: ${props => props.theme.DEFAULT_FONT};
 
 	@media ${responsive.sm} {
-		font-size: 2.25rem;
+		font-size: 1.25rem;
 	}
 
 	${({ margin }) =>
@@ -151,15 +143,15 @@ export const H2 = styled.h2<IH>`
 `;
 
 export const H3 = styled.h3<IH>`
+	font-size: 1.625rem;
+	line-height: 1.875rem;
 	letter-spacing: 0.4px;
-	font-size: 1.25rem;
-	line-height: 1.4rem;
 	margin-bottom: 6px;
 	font-weight: ${props => props.weight || '600'};
 
 	@media ${responsive.sm} {
-		font-size: 1.625rem;
-		line-height: 1.875rem;
+		font-size: 1.25rem;
+		line-height: 1.4rem;
 	}
 
 	${({ padding }) =>
@@ -271,50 +263,15 @@ export const TableIcon = styled.div<{ padding?: string }>`
 	}
 `;
 
-export const AbsoluteInputIcon = styled.span`
-	padding: 3px;
-	cursor: pointer;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	position: absolute;
-	right: 18px;
-	top: 25%;
-
-	path.second-path {
-		transition: 0.2s;
-		font-weight: normal;
-		fill: #a6a6c3;
-	}
-
-	:hover {
-		path.second-path {
-			fill: #79798e;
-		}
-	}
-`;
-
 export const TextEllipsis = styled.div<{ maxWidth?: string }>`
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	max-width: ${props => props.maxWidth || '100%'};
+	max-width: 100%;
 
 	@media ${responsive.lg} {
-		max-width: 100%;
+		max-width: ${props => props.maxWidth || '100%'};
 	}
-`;
-
-export const Message = styled.div`
-	text-align: center;
-	width: 100%;
-	padding: 15px;
-	border: 1px solid #00968836;
-	border-radius: 2px;
-	font-size: 15px;
-	line-height: 19px;
-	letter-spacing: 0.2px;
-	background-color: #00968821;
 `;
 
 export const NotFoundWrapperStyled = styled.div`

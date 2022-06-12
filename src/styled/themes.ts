@@ -17,7 +17,9 @@ const common = {
 	BLOCK_BG: '#fff',
 	MODAL_BG: '#fff',
 	SCROLLBAR_COLOR: '#d1d1de',
+	MAX_CONTAINER_WIDTH: '1800px',
 	// BTN
+	BTN_HEIGHT: '54px',
 	BTN_COLOR: '#fff',
 	BTN_BG_COLOR: '#9c95ff',
 	BTN_BG_COLOR_ACTIVE: '#8881e0',
@@ -27,7 +29,7 @@ const common = {
 	BTN_NORMAL_BG_COLOR_ACTIVE: '#D3ECFF',
 	BTN_BORDER_RADIUS: '3rem',
 	// FONT
-	DEFAULT_FONT: 'Quicksand, Arial,  Helvetica-neue',
+	DEFAULT_FONT: 'Quicksand, Arial, Helvetica-neue',
 	DEFAULT_FONT_SIZE: '16px',
 	DEFAULT_LINE_HEIGHT: '22.7px',
 	DEFAULT_FONT_COLOR: '#04051F',
@@ -62,10 +64,8 @@ const common = {
 	SVG_FILL_ACTIVE: '#9c95ff',
 	TABLE_COLOR: '#43435f',
 	TABLE_SECONDARY_COLOR: '#79798e',
-	TABLE_CONTAINER_MARGIN_XS: '-15px',
-	TABLE_CONTAINER_MARGIN_SM: '-47px',
-	BLOCK_PADDING_XS: '15px',
-	BLOCK_PADDING_SM: '47px'
+	BLOCK_PADDING_SM: '15px',
+	BLOCK_PADDING: '47px'
 };
 
 export const themes = {

@@ -1,16 +1,8 @@
 import styled, { css } from 'styled-components';
 
-import { responsive } from '@/styled/responsive';
-
 import { ISectionProps } from '.';
 
-export const AccordionContainer = styled.div<{ inBlock?: boolean }>`
-	margin-right: ${props => (props.inBlock ? '-15px' : '0')};
-
-	@media ${responsive.sm} {
-		margin-right: ${props => (props.inBlock ? '-47px' : '0')};
-	}
-`;
+export const AccordionContainer = styled.div<{ inBlock?: boolean }>``;
 
 export const AccordionTitle = styled.div<ISectionProps>`
 	padding: 40px 40px 40px 0;

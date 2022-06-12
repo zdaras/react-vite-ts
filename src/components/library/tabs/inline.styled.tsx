@@ -13,20 +13,20 @@ export const TabMenu = styled.ul`
 	-webkit-padding-start: 0px;
 
 	li {
-		display: block;
+		padding: 10px 80px 10px 0;
+		display: inline-block;
+		text-align: left;
 		margin-left: 0;
-		padding: 10px 0;
 		font-size: 20px;
 		transition: all 0.3s;
 		cursor: pointer;
 		color: ${({ theme }) => theme.DEFAULT_FONT_COLOR};
-		text-align: center;
 		position: relative;
 
 		@media ${responsive.md} {
-			padding: 10px 80px 10px 0;
-			display: inline-block;
-			text-align: left;
+			padding: 10px 0;
+			display: block;
+			text-align: center;
 		}
 
 		&::before {

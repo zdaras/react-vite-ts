@@ -65,15 +65,9 @@ export const ModalBody = styled.div<IModalProps>`
 			case 'small':
 				return css`
 					 {
-						width: ${({ width }: IModalProps) => width || '33%'};
+						width: ${({ width }: IModalProps) => width || '25%'};
 						height: ${({ height }) => height || 'auto'};
-						padding: 40px 55px;
-
-						@media ${responsive.md} {
-							width: ${({ width }: IModalProps) => width || '25%'};
-							height: ${({ height }) => height || 'auto'};
-							min-width: 30rem;
-						}
+						min-width: 30rem;
 					}
 				`;
 			case 'large':
@@ -88,15 +82,8 @@ export const ModalBody = styled.div<IModalProps>`
 				return css`
 					 {
 						height: ${({ height }) => height || 'auto'};
-
-						@media ${responsive.md} {
-							width: ${({ width }: IModalProps) => width || '40%'};
-							min-width: ${({ minWidth }: IModalProps) => minWidth || '34rem'};
-						}
-
-						@media ${responsive.lg} {
-							width: ${({ width }: IModalProps) => width || '30%'};
-						}
+						width: ${({ width }: IModalProps) => width || '30%'};
+						min-width: ${({ minWidth }: IModalProps) => minWidth || '34rem'};
 					}
 				`;
 		}
@@ -122,12 +109,16 @@ export const ModalBody = styled.div<IModalProps>`
 		}
 	}};
 
-	@media (max-width: 776px) {
-		width: 95%;
-		min-width: auto;
-		max-height: 80%;
+	@media ${responsive.sm} {
+		width: 100%;
+		min-width: 100%;
+		max-height: 100%;
+		min-height: 100%;
 		padding: 28px;
-		overflow: auto;
+		overflow-y: auto;
+		border-radius: 0;
+		display: flex;
+		flex-direction: column;
 	}
 `;
 

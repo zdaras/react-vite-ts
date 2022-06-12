@@ -1,10 +1,9 @@
-import React, { FC, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { FC, useState } from 'react';
 
 import Modal from '@/components/library/modal';
 import Button from '@/components/library/button';
 import { H5 } from '@/styled/shared';
-import { Divider } from '@/styled/shared/divider';
+import { useTranslation } from '@/hooks';
 
 export const DeleteModal: FC<IProps> = ({ isOpen, closeModal, onDelete, text, autoClose }) => {
 	const { t } = useTranslation();
@@ -24,9 +23,8 @@ export const DeleteModal: FC<IProps> = ({ isOpen, closeModal, onDelete, text, au
 					{t(text)}
 				</H5>
 			)}
-			<Button text={t('Delete')} onClick={handleDelete} loading={loading} />
-			<Divider margin="0 0 15px 0" />
-			<Button text={t('Cancel')} onClick={closeModal} buttonType="text" />
+			<Button text={t('Delete')} margin="0 0 15px" loading={loading} onClick={handleDelete} />
+			<Button text={t('Cancel')} buttonType="text" onClick={closeModal} />
 		</Modal>
 	);
 };

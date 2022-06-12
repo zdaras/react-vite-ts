@@ -4,11 +4,11 @@ import { responsive } from '@/styled/responsive';
 
 export const Tab = styled.div`
 	width: 100%;
-	padding-top: 10px;
+	padding-top: 36px;
 	position: relative;
 
 	@media ${responsive.md} {
-		padding-top: 36px;
+		padding-top: 10px;
 	}
 
 	.active {

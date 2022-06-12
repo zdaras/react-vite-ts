@@ -1,5 +1,5 @@
 import Container from '@/components/library/container';
-import Header from '@/components/header';
+import Header from '@/components/layout/header';
 import { WrapperStyled, Container as MainContainer } from '@/styled/shared';
 import { FC } from '@/types';
 

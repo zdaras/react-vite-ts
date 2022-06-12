@@ -1,12 +1,10 @@
-import React, { FC, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { FC, useState } from 'react';
 
 import Modal from '@/components/library/modal';
 import Button from '@/components/library/button';
 import { ErrorText } from '@/components/form';
 import { H5 } from '@/styled/shared';
-import { Divider } from '@/styled/shared/divider';
-import useFormError from '@/hooks/useFormError';
+import { useFormError, useTranslation } from '@/hooks';
 
 export const ConfirmModal: FC<IProps> = ({ isOpen, closeModal, closeParentModal, onSubmit, text, autoClose }) => {
 	const { t } = useTranslation();
@@ -35,9 +33,8 @@ export const ConfirmModal: FC<IProps> = ({ isOpen, closeModal, closeParentModal,
 				</H5>
 			)}
 			<ErrorText formError={formError} center />
-			<Button text={t('Confirm')} onClick={handleSubmit} loading={loading} />
-			<Divider margin="0 0 15px 0" />
-			<Button text={t('Cancel')} onClick={closeModal} buttonType="text" />
+			<Button text={t('Confirm')} margin="0 0 15px" loading={loading} onClick={handleSubmit} />
+			<Button text={t('Cancel')} buttonType="text" onClick={closeModal} />
 		</Modal>
 	);
 };

@@ -1,7 +1,6 @@
-import React, { useState, memo, FC, SyntheticEvent } from 'react';
+import { memo, FC, SyntheticEvent } from 'react';
 
-import { AbsoluteInputIcon } from '@/styled/shared';
-import { EyeShow, EyeHide, CalendarIcon, CloseSmallIcon } from '@/components/icons';
+import { CalendarIcon, CloseSmallIcon } from '@/components/icons';
 
 import { InputStyled, AbsoluteCompStyled } from './input-styled';
 import { LabelStyled } from './label-styled';
@@ -12,14 +11,12 @@ export const Input: FC<IProps> = ({
 	value,
 	id,
 	type = 'text',
-	inputType,
 	label,
 	onChange,
 	active,
 	placeholder,
 	autoFocus,
 	name,
-	showPassword,
 	errorText,
 	AbsoluteComp,
 	onClick,
@@ -33,24 +30,18 @@ export const Input: FC<IProps> = ({
 	setValue,
 	uncheck,
 	autoComplete,
-	success,
 	ref
 }) => {
-	const [typeState, setTypeState] = useState<IType>(type);
-	const toggleShowPassword = () => {
-		setTypeState(prev => (prev === 'password' ? 'text' : 'password'));
-	};
 	const clearValue = (e: any) => {
 		e.preventDefault();
 		if (typeof setValue === 'function' && name) setValue(name, null);
 	};
 
 	return (
-		<LabelStyled type={typeState} disabled={disabled}>
+		<LabelStyled type={type} disabled={disabled}>
 			<InputStyled
 				value={value}
-				type={typeState}
-				inputType={inputType}
+				type={type}
 				onChange={onChange}
 				onBlur={onBlur}
 				active={active}
@@ -69,20 +60,14 @@ export const Input: FC<IProps> = ({
 				AbsoluteComp={AbsoluteComp}
 				checked={checked}
 				uncheck={uncheck}
-				success={success}
-				{...(typeState === 'number' && { step: '0.00000001' })}
-				{...(typeState === 'number' && { onKeyDown: evt => evt.key === 'e' && evt.preventDefault() })}
+				{...(type === 'number' && { step: '0.00000001' })}
+				{...(type === 'number' && { onKeyDown: evt => evt.key === 'e' && evt.preventDefault() })}
 			/>
 			{smallSwitcher && <div className="smallSwitcher" />}
 			{label && (
 				<label className="input-label" htmlFor={id || name} input-type={type}>
 					{label}
 				</label>
-			)}
-			{showPassword && (
-				<AbsoluteInputIcon onClick={toggleShowPassword}>
-					{typeState === 'password' ? <EyeShow /> : <EyeHide />}
-				</AbsoluteInputIcon>
 			)}
 			{AbsoluteComp && <AbsoluteCompStyled>{AbsoluteComp}</AbsoluteCompStyled>}
 			{!AbsoluteComp && datepicker && !value && (
@@ -104,14 +89,12 @@ export interface IProps {
 	value?: any;
 	id?: string;
 	type?: IType;
-	inputType?: 'normal' | 'filter';
 	onChange?: (e: SyntheticEvent) => void;
 	active?: boolean;
 	label?: string | React.ReactNode;
 	placeholder?: string;
 	autoFocus?: boolean;
 	name?: string;
-	showPassword?: boolean;
 	errorText?: string;
 	switcher?: boolean;
 	smallSwitcher?: boolean;
@@ -125,17 +108,14 @@ export interface IProps {
 	setValue?: (name: any, value?: any) => any;
 	uncheck?: boolean;
 	autoComplete?: string;
-	success?: boolean;
 	ref?: any;
 }
 
 Input.defaultProps = {
 	type: 'text',
-	inputType: 'normal',
 	active: false,
 	autoFocus: false,
 	placeholder: ' ',
-	showPassword: false,
 	AbsoluteComp: null,
 	switcher: false,
 	smallSwitcher: false,

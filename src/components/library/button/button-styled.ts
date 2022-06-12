@@ -20,6 +20,7 @@ const animationRule = css`
 export const ButtonStyled = styled.button<IProps>`
 	position: relative;
 	width: ${props => (props.inline ? 'auto' : '100%')};
+	height: ${({ theme }) => theme.BTN_HEIGHT};
 	border: 0px;
 	border-radius: ${props => props.theme.BTN_BORDER_RADIUS};
 	box-shadow: none;
@@ -54,15 +55,10 @@ export const ButtonStyled = styled.button<IProps>`
 			background: ${theme.BTN_BG_COLOR_ACTIVE};
 		`}
 
-	${({ circle }) =>
-		circle &&
+	${({ margin }) =>
+		margin &&
 		css`
-			width: 46px;
-			height: 46px !important;
-
-			svg {
-				margin: 0;
-			}
+			margin: ${margin};
 		`}
 
 	${({ disabled }) =>
@@ -95,80 +91,12 @@ export const ButtonStyled = styled.button<IProps>`
 		`}
 
 
-	${({ buttonType }) => {
+	${({ buttonType, height, padding }) => {
 		switch (buttonType) {
-			case 'normal':
-				return css`
-					 {
-						height: 54px;
-						padding: ${(props: IProps) => (props.circle ? '10px 13px' : '10px 44px')};
-						background-color: ${({ theme }) => theme.BTN_NORMAL_BG_COLOR};
-						color: ${({ theme }) => theme.BTN_NORMAL_COLOR};
-
-						path:not(.icon-background) {
-							fill: ${({ theme }) => theme.BTN_NORMAL_COLOR};
-						}
-
-						:hover {
-							background-color: ${({ theme }) => theme.BTN_NORMAL_BG_COLOR_ACTIVE};
-							color: ${({ theme }) => theme.BTN_NORMAL_COLOR_ACTIVE};
-
-							path:not(.icon-background) {
-								fill: ${({ theme }) => theme.BTN_NORMAL_COLOR_ACTIVE};
-							}
-						}
-					}
-				`;
-			case 'medium':
-				return css`
-					 {
-						height: 47px;
-						padding: ${(props: IProps) => (props.circle ? '10px 15px' : '10px 32px')};
-						background-color: ${({ theme }) => theme.BTN_NORMAL_BG_COLOR};
-						color: ${({ theme }) => theme.BTN_NORMAL_COLOR};
-
-						path:not(.icon-background) {
-							fill: ${({ theme }) => theme.BTN_NORMAL_COLOR};
-						}
-
-						:hover {
-							background-color: ${({ theme }) => theme.BTN_NORMAL_BG_COLOR_ACTIVE};
-							color: ${({ theme }) => theme.BTN_NORMAL_COLOR_ACTIVE};
-
-							path:not(.icon-background) {
-								fill: ${({ theme }) => theme.BTN_NORMAL_COLOR_ACTIVE};
-							}
-						}
-					}
-				`;
-			case 'outline':
-				return css`
-					 {
-						height: 47px;
-						padding: ${(props: IProps) => (props.circle ? '10px 15px' : '10px 32px')};
-						background-color: transparent;
-						color: #1d93f7db;
-						border: 1px solid #1d93f77d;
-
-						path:not(.icon-background) {
-							fill: ${({ theme }) => theme.BTN_NORMAL_COLOR};
-						}
-
-						:hover {
-							background-color: #edf8ff;
-							border-color: #edf8ff;
-
-							path:not(.icon-background) {
-								fill: ${({ theme }) => theme.BTN_NORMAL_COLOR_ACTIVE};
-							}
-						}
-					}
-				`;
 			case 'primary':
 				return css`
 					 {
-						height: 47px;
-						padding: ${(props: IProps) => (props.circle ? '10px 13px' : '10px 44px')};
+						padding: 10px 44px;
 						background-color: ${({ theme }) => theme.BTN_BG_COLOR};
 						color: ${({ theme }) => theme.BTN_COLOR};
 
@@ -184,8 +112,8 @@ export const ButtonStyled = styled.button<IProps>`
 			case 'text':
 				return css`
 					 {
-						height: ${(props: IProps) => props.height || 'auto'};
-						padding: ${(props: IProps) => (props.circle ? '10px 13px' : props.padding || '10px 44px')};
+						height: ${height || 'auto'};
+						padding: ${padding || '0'};
 						background: transparent;
 						color: ${({ theme }) => theme.BTN_NORMAL_COLOR};
 
@@ -194,34 +122,10 @@ export const ButtonStyled = styled.button<IProps>`
 						}
 					}
 				`;
-			case 'circle':
-				return css`
-					 {
-						height: 30px;
-						width: 30px;
-						padding: 0px;
-						background-color: ${({ theme }) => theme.BTN_NORMAL_BG_COLOR};
-						color: ${({ theme }) => theme.BTN_NORMAL_COLOR};
-
-						path:not(.icon-background) {
-							fill: ${({ theme }) => theme.BTN_NORMAL_COLOR};
-						}
-
-						:hover {
-							background-color: ${({ theme }) => theme.BTN_NORMAL_BG_COLOR_ACTIVE};
-							color: ${({ theme }) => theme.BTN_NORMAL_COLOR_ACTIVE};
-
-							path:not(.icon-background) {
-								fill: ${({ theme }) => theme.BTN_NORMAL_COLOR_ACTIVE};
-							}
-						}
-					}
-				`;
 			default:
 				return css`
 					 {
-						height: 54px;
-						padding: ${(props: IProps) => (props.circle ? '10px 13px' : props.padding || '10px 44px')};
+						padding: ${padding || '10px 44px'};
 						background-color: ${({ theme }) => theme.BTN_BG_COLOR};
 						color: ${({ theme }) => theme.BTN_COLOR};
 

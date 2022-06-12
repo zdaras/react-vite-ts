@@ -11,12 +11,12 @@ import useActions from '@/hooks/useActions';
 import { useTranslation, useApiFormSubmit } from '@/hooks';
 import { IRegisterParams } from '@/services/api/user/types';
 
-export const Register = () => {
+const Register = () => {
 	const { t } = useTranslation();
 	const register = useActions(userActions.register);
-	const [registerAction, formError, loading] = useApiFormSubmit(register);
+	const { call, formError, loading } = useApiFormSubmit(register);
 
-	const onSubmit = async (values: IRegisterParams) => registerAction(values);
+	const onSubmit = async (values: IRegisterParams) => call(values);
 
 	return (
 		<>

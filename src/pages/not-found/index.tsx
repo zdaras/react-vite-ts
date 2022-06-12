@@ -5,7 +5,7 @@ import { H1, RouteWrapperStyled, NotFoundWrapperStyled } from '@/styled/shared';
 import Helmet from '@/components/shared/helmet';
 import NotFoundIcon from '@/assets/icons/404_icon.svg';
 
-export const NotFound = () => {
+const NotFound = () => {
 	const { t } = useTranslation();
 
 	return (

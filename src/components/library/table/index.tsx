@@ -16,13 +16,12 @@ export function Table<T>({
 	onClick,
 	withIcon,
 	hoverable,
-	scale,
 	overflow,
 	containerProps
 }: IProps<T>) {
 	return (
 		<TableContainer overflow={overflow} {...containerProps}>
-			<TableComp withIcon={withIcon} hoverable={hoverable} scale={scale ? 'true' : undefined}>
+			<TableComp withIcon={withIcon} hoverable={hoverable}>
 				{showHeader && headers && headers.length > 0 && (
 					<thead>{renderHeader ? renderHeader(headers) : <TableHeader headers={headers} />}</thead>
 				)}
@@ -49,7 +48,6 @@ Table.defaultProps = {
 	onClick: () => {},
 	withIcon: false,
 	hoverable: true,
-	scale: true,
 	containerProps: {}
 } as Partial<IProps>;
 

@@ -5,14 +5,14 @@ import { IDataGrid } from '@/types/table';
 
 export const TableComp = styled.table<IDataGrid>`
 	width: 100%;
-	display: block;
+	display: table;
 	border-spacing: 0;
 	border-collapse: collapse;
 	overflow: hidden;
 
 	@media ${responsive.sm} {
 		width: 100%;
-		display: table;
+		display: block;
 	}
 
 	tr {
@@ -27,23 +27,6 @@ export const TableComp = styled.table<IDataGrid>`
 
 		td:nth-last-child(-n + 2) {
 			text-align: right;
-		}
-
-		td:last-child {
-			color: #79798e;
-			padding-right: ${props => props.theme.BLOCK_PADDING_XS};
-
-			@media ${responsive.sm} {
-				padding-right: ${props => props.theme.BLOCK_PADDING_SM};
-			}
-		}
-
-		td:first-child {
-			padding-left: ${props => props.theme.BLOCK_PADDING_XS};
-
-			@media ${responsive.sm} {
-				padding-left: ${props => props.theme.BLOCK_PADDING_SM};
-			}
 		}
 
 		:last-child {
@@ -65,11 +48,6 @@ export const TableComp = styled.table<IDataGrid>`
 		border-bottom: 0;
 	}
 
-	img {
-		width: 38px;
-		height: 38px;
-	}
-
 	tbody tr {
 		:not(:first-child) {
 			border-top: 1px solid #ededf7;
@@ -78,24 +56,6 @@ export const TableComp = styled.table<IDataGrid>`
 
 	${props =>
 		props.hoverable &&
-		props.scale &&
-		css`
-			cursor: pointer;
-
-			tbody tr:hover {
-				transform: scale(1.007);
-				background-color: #7073af09;
-				border-top-color: transparent;
-
-				& + tr {
-					border-top-color: transparent;
-				}
-			}
-		`};
-
-	${props =>
-		props.hoverable &&
-		!props.scale &&
 		css`
 			cursor: pointer;
 
@@ -126,8 +86,6 @@ export const TableContainer = styled.div<{ overflow?: string }>`
 	overflow: ${props => props.overflow || 'hidden'};
 	position: relative;
 	flex: 1 1 100%;
-	margin-left: ${props => props.theme.TABLE_CONTAINER_MARGIN_XS};
-	margin-right: ${props => props.theme.TABLE_CONTAINER_MARGIN_XS};
 	overflow-x: ${props => (props.overflow ? 'unset' : 'auto')};
 
 	table {
@@ -138,10 +96,5 @@ export const TableContainer = styled.div<{ overflow?: string }>`
 		width: 4px;
 		height: 5px;
 		background-color: #d9d9eb;
-	}
-
-	@media ${responsive.sm} {
-		margin-left: ${props => props.theme.TABLE_CONTAINER_MARGIN_SM};
-		margin-right: ${props => props.theme.TABLE_CONTAINER_MARGIN_SM};
 	}
 `;

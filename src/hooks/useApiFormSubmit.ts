@@ -5,18 +5,20 @@ import { IError } from '@/types/error';
 
 import { useFormError } from '.';
 
-const useApiInForm = <T>(apiCallFunction: T, params = {}): IReturn<T> => {
+const useApiInForm = <T>(callFunction: T, params = {}): IReturn<T> => {
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState(false);
+	const [error, setError] = useState(false);
 	const { formError, setFormError } = useFormError();
 
-	const callApi = async (par: any = null, withLoading = true) => {
+	const call = async (par: any = null, withLoading = true) => {
 		try {
-			if (typeof apiCallFunction === 'function') {
+			if (typeof callFunction === 'function') {
 				const parameters = par || params;
 				if (withLoading) setLoading(true);
 				setFormError();
-				const response: ThenArg<T> = await apiCallFunction(parameters);
+				const response: ThenArg<T> = await callFunction(parameters);
+				setError(false);
 				setSuccess(true);
 
 				return Promise.resolve(response);
@@ -24,6 +26,7 @@ const useApiInForm = <T>(apiCallFunction: T, params = {}): IReturn<T> => {
 			return Promise.reject();
 		} catch (err) {
 			setFormError(err);
+			setError(true);
 			return Promise.reject(err);
 		} finally {
 			setLoading(false);
@@ -31,9 +34,15 @@ const useApiInForm = <T>(apiCallFunction: T, params = {}): IReturn<T> => {
 	};
 
 	// @ts-ignore
-	return [callApi, formError, loading, success];
+	return { call, formError, loading, success, error };
 };
 
-type IReturn<T> = [T, IError, boolean, boolean];
+type IReturn<T> = {
+	call: T;
+	formError: IError;
+	loading: boolean;
+	success: boolean;
+	error: boolean;
+};
 
 export default useApiInForm;

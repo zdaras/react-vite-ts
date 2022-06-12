@@ -14,12 +14,12 @@ export const Button: FC<IProps> = ({
 	inline,
 	icon,
 	text,
-	circle,
 	padding,
 	loading,
 	fontSize,
 	className,
-	height
+	height,
+	margin
 }) => {
 	const Icon = icon ? Icons[icon] : () => null;
 
@@ -31,11 +31,11 @@ export const Button: FC<IProps> = ({
 			disabled={disabled}
 			buttonType={buttonType}
 			inline={inline}
-			circle={circle}
 			padding={padding}
 			loading={loading ? 'true' : undefined}
 			className={className}
 			height={height}
+			margin={margin}
 		>
 			<Icon />
 			{text && <ButtonText fontSize={fontSize}>{text}</ButtonText>}
@@ -50,16 +50,16 @@ export interface IProps {
 	onClick?: (e: SyntheticEvent) => any;
 	active?: boolean;
 	disabled?: boolean;
-	buttonType?: 'normal' | 'primary' | 'medium' | 'text' | 'outline' | 'circle';
+	buttonType?: 'normal' | 'primary' | 'medium' | 'text' | 'outline';
 	inline?: boolean;
 	icon?: keyof typeof Icons;
 	text?: string;
-	circle?: boolean;
 	padding?: string;
 	loading?: boolean | string;
 	fontSize?: string;
 	className?: string;
 	height?: string;
+	margin?: string;
 }
 
 Button.defaultProps = {
@@ -67,7 +67,6 @@ Button.defaultProps = {
 	active: false,
 	disabled: false,
 	inline: false,
-	circle: false,
 	loading: false
 } as Partial<IProps>;
 
