@@ -9,7 +9,6 @@ import { Flex, FlexItem } from '@/styled/flex';
 import { required, isEmail } from '@/utils/validator';
 import { userActions } from '@/store/ducks/user';
 import { useActions, useApiFormSubmit, useTranslation } from '@/hooks';
-import { ILoginParams } from '@/services/api/user/types';
 
 const Login = () => {
 	const { t } = useTranslation();
@@ -18,7 +17,7 @@ const Login = () => {
 	const login = useActions(userActions.login);
 	const { call, loading, formError } = useApiFormSubmit(login);
 
-	const onSubmit = async (values: ILoginParams) => call(values, redirect);
+	const onSubmit = async (values: Parameters<typeof call>[0]) => call(values, redirect);
 
 	return (
 		<>

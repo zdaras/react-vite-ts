@@ -1,4 +1,3 @@
-import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 import { Flex, FlexItem } from '@/styled/flex';
@@ -7,28 +6,18 @@ import Button from '@/components/library/button';
 import { BlockStyled, H1 } from '@/styled/shared';
 import Tooltip from '@/components/library/tooltip';
 import Helmet from '@/components/shared/helmet';
-import useFormError from '@/hooks/useFormError';
 import { isValidPassword } from '@/utils/validator';
 import { qs } from '@/utils/helpers';
 import { userActions } from '@/store/ducks/user';
-import useActions from '@/hooks/useActions';
-import { IRecoverPasswordParams } from '@/services/api/user/types';
+import { useActions, useTranslation, useApiFormSubmit } from '@/hooks';
 
 const PasswordRecovery = () => {
 	const { t } = useTranslation();
-	const queryParams: { key?: string } = qs.parse(useLocation().search); // { key: string }
-	const { formError, setFormError } = useFormError();
+	const queryParams: { key?: string } = qs.parse(useLocation().search);
 	const recoverPassword = useActions(userActions.recoverPassword);
+	const { call, formError } = useApiFormSubmit(recoverPassword);
 
-	const onSubmit = async (values: IRecoverPasswordParams) => {
-		try {
-			setFormError();
-			const params = { ...values, key: queryParams.key };
-			recoverPassword(params);
-		} catch (error) {
-			setFormError(error);
-		}
-	};
+	const onSubmit = async (values: Parameters<typeof call>[0]) => call({ ...values, key: queryParams.key });
 
 	return (
 		<>
@@ -68,7 +57,7 @@ const PasswordRecovery = () => {
 										showErrorText
 									/>
 
-									<ErrorText formError={formError} center />
+									<ErrorText center formError={formError} />
 
 									<Button type="submit" text={t('Confirm')} loading={methods.formState.isSubmitting} />
 								</BlockStyled>

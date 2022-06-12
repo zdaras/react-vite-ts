@@ -34,8 +34,8 @@ export interface IDropdown {
 export type IDropdownArray = IDropdown[];
 
 export interface IPagination {
-	startPage: number;
-	limit: number;
+	startPage?: number;
+	limit?: number;
 	[key: string]: any;
 }
 

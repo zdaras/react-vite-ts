@@ -9,14 +9,13 @@ import { isEmail, isValidPassword } from '@/utils/validator';
 import { userActions } from '@/store/ducks/user';
 import useActions from '@/hooks/useActions';
 import { useTranslation, useApiFormSubmit } from '@/hooks';
-import { IRegisterParams } from '@/services/api/user/types';
 
 const Register = () => {
 	const { t } = useTranslation();
 	const register = useActions(userActions.register);
 	const { call, formError, loading } = useApiFormSubmit(register);
 
-	const onSubmit = async (values: IRegisterParams) => call(values);
+	const onSubmit = async (values: Parameters<typeof call>[0]) => call(values);
 
 	return (
 		<>

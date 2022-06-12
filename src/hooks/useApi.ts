@@ -22,6 +22,7 @@ const useApi = <T>(
 		setFetchCount(prev => {
 			const isPrevApiCall = prev > requestCount;
 			if (!isPrevApiCall || overridePrevCall) setData(result); // dont overwrite with previous apiCallFunction
+
 			return prev + 1;
 		});
 	};
@@ -39,9 +40,11 @@ const useApi = <T>(
 
 				return Promise.resolve(response);
 			}
+
 			return Promise.reject();
 		} catch (err) {
 			setError(true);
+
 			return Promise.reject(err);
 		} finally {
 			setLoading(false);
@@ -49,24 +52,12 @@ const useApi = <T>(
 		}
 	}, []);
 
-	const reset = useCallback((resetParams = true) => {
-		setData(initialData);
-		setLoading(false);
-		setError(false);
-		setFetched(false);
-		setFetchCount(0);
-		setRequestCount(0);
-		if (resetParams) setParameters(params);
-	}, []);
-
-	const resetParameters = useCallback(() => setParameters(params), []);
-
 	useEffectOnce(() => {
 		if (fetchOnMount) fetchUrl();
 	});
 
 	// @ts-ignore
-	return { data: res, loading, error, fetchUrl, fetched, fetchCount, p, reset, requestCount, resetParameters };
+	return { data: res, loading, error, fetchUrl, fetched, fetchCount, p, requestCount };
 };
 
 type IReturn<T> = {
@@ -77,9 +68,7 @@ type IReturn<T> = {
 	fetched: boolean;
 	fetchCount: number;
 	p: IPagination;
-	reset: () => void;
 	requestCount: number;
-	resetParameters: () => void;
 };
 
 export default useApi;
