@@ -16,7 +16,7 @@ const Login = () => {
 	const { state } = useLocation();
 	const redirect = (state as any)?.from?.pathname || '/';
 	const login = useActions(userActions.login);
-	const { call, formError, loading } = useApiFormSubmit(login);
+	const { call, loading, formError } = useApiFormSubmit(login);
 
 	const onSubmit = async (values: ILoginParams) => call(values, redirect);
 

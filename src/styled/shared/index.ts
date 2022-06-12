@@ -71,7 +71,6 @@ export const BlockStyled = styled.div<IBlockStyled>`
 	position: relative;
 	height: ${props => props.height || '100%'};
 	padding: ${props => props.padding || props.theme.BLOCK_PADDING};
-	border-radius: 1rem;
 
 	@media ${responsive.sm} {
 		padding: ${props => props.padding || props.theme.BLOCK_PADDING_SM};

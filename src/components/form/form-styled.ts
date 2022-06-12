@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { IProps } from './form-input';
 import { IProps as IErrorProps } from './error';
@@ -15,18 +15,28 @@ export const FormInputWrapper = styled.div<Partial<IProps>>`
 `;
 
 export const ErrorWrapper = styled.div<IErrorProps>`
-	transition: min-height 0.1s, opacity 0.2s;
-	padding: ${({ inForm }) => (inForm ? '0 28px' : '0 6px')};
-	margin: ${({ text, margin }) => (text ? margin || '8px 0' : '0')};
-	min-height: ${({ text }) => (text ? '25px' : '0')};
-	display: flex;
-	align-items: center;
+	transition: min-height 0.15s, padding 0.15s, opacity 0.2s;
+	padding: 0 32px;
+	background-color: #d859471f;
+	margin: ${props => (props.text ? props.margin || '0 0 25px' : '0')};
+	min-height: ${props => (props.text ? '35px' : '0')};
+	display: ${props => (props.inline ? 'inline-flex' : 'flex')};
 	position: relative;
 	flex-wrap: wrap;
 	align-items: stretch;
 	flex: 1 1 auto;
-	justify-content: ${({ center }) => (center ? 'center' : 'flex-start')};
-	opacity: ${({ text }) => (text ? '1' : '0')};
+	justify-content: center;
+	align-items: center;
+	opacity: ${props => (props.text ? '1' : '0')};
+
+	${({ inForm, center, text }) =>
+		inForm &&
+		css`
+			padding: ${text ? '3px 0 0' : '0'};
+			min-height: ${text ? '20px' : '0'};
+			justify-content: ${center ? 'center' : 'flex-start'};
+			background-color: transparent;
+		`}
 `;
 
 export const ErrorText = styled.div<IErrorProps>`

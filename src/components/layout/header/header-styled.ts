@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { responsive } from '@/styled/responsive';
+
 export const HeaderStyled = styled.header`
 	background-color: transparent;
 	display: flex;
@@ -12,6 +14,14 @@ export const HeaderStyled = styled.header`
 
 export const HeaderLeftMenu = styled.div`
 	display: flex;
+
+	button:not(:last-child) {
+		margin-right: 20px;
+	}
+
+	@media ${responsive.sm} {
+		display: none;
+	}
 `;
 
 export const UserIconStyled = styled.span`

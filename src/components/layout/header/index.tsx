@@ -34,17 +34,17 @@ export const Header: FC = () => {
 		<HeaderStyled>
 			<HeaderLeftMenu>
 				<Button buttonType="text" inline onClick={changeTheme}>
-					{t('DARK MODE')}
+					{t('DARK')}
 				</Button>
 				<Button
-					buttonType="text"
 					inline
+					buttonType="text"
 					active={i18n.language === 'en-US'}
 					onClick={() => i18n.changeLanguage('en-US')}
 				>
 					EN
 				</Button>
-				<Button buttonType="text" inline active={i18n.language === 'ka'} onClick={() => i18n.changeLanguage('ka')}>
+				<Button inline buttonType="text" active={i18n.language === 'ka'} onClick={() => i18n.changeLanguage('ka')}>
 					KA
 				</Button>
 			</HeaderLeftMenu>
