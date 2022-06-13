@@ -50,7 +50,7 @@ export interface IProps {
 	onClick?: (e: SyntheticEvent) => any;
 	active?: boolean;
 	disabled?: boolean;
-	buttonType?: 'normal' | 'primary' | 'medium' | 'text' | 'outline';
+	buttonType?: 'primary' | 'text';
 	inline?: boolean;
 	icon?: keyof typeof Icons;
 	text?: string;
