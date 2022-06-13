@@ -21,7 +21,6 @@ export const Input: FC<IProps> = ({
 	AbsoluteComp,
 	onClick,
 	switcher,
-	smallSwitcher,
 	disabled,
 	datepicker,
 	onBlur,
@@ -56,14 +55,12 @@ export const Input: FC<IProps> = ({
 				readOnly={readOnly}
 				autoComplete={autoComplete}
 				switcher={switcher}
-				smallSwitcher={smallSwitcher}
 				AbsoluteComp={AbsoluteComp}
 				checked={checked}
 				uncheck={uncheck}
 				{...(type === 'number' && { step: '0.00000001' })}
 				{...(type === 'number' && { onKeyDown: evt => evt.key === 'e' && evt.preventDefault() })}
 			/>
-			{smallSwitcher && <div className="smallSwitcher" />}
 			{label && (
 				<label className="input-label" htmlFor={id || name} input-type={type}>
 					{label}
@@ -97,7 +94,6 @@ export interface IProps {
 	name?: string;
 	errorText?: string;
 	switcher?: boolean;
-	smallSwitcher?: boolean;
 	disabled?: boolean;
 	AbsoluteComp?: React.ReactNode;
 	onClick?: (e: SyntheticEvent) => void;
@@ -118,7 +114,6 @@ Input.defaultProps = {
 	placeholder: ' ',
 	AbsoluteComp: null,
 	switcher: false,
-	smallSwitcher: false,
 	autoComplete: 'off'
 } as Partial<IProps>;
 

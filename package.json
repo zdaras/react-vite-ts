@@ -9,6 +9,7 @@
 		"build:vite": "vite build",
 		"preview": "vite preview",
 		"clean": "rimraf ./dist",
+		"clean:modules": "rimraf ./node_modules",
 		"build": "cross-env NODE_ENV=production && rimraf ./dist && npm run build:vite",
 		"lint": "eslint src/**/*.{ts,tsx}",
 		"format": "prettier --write src/**/*.{ts,tsx}",

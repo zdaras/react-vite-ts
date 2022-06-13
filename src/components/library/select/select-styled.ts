@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 
-import { IProps } from '.';
+import { IProps } from './select';
 
 const spinner = keyframes`
   0% {
@@ -27,12 +27,7 @@ export const SelectStyled = styled.div<IProps & { isOpen: boolean; disabled: boo
 	display: flex;
 	flex: ${props => (props.inline ? '0 0 auto' : '1')};
 	flex-wrap: wrap;
-	min-height: ${props =>
-		props.Trigger
-			? 'auto'
-			: ['select', 'currency'].includes(String(props.dropdownType))
-			? props.theme.INPUT_HEIGHT
-			: '50px'};
+	min-height: ${props => (props.Trigger ? 'auto' : props.theme.INPUT_HEIGHT)};
 	letter-spacing: 0.4px;
 	border: ${props => (props.borderless ? 'none' : '1px solid')};
 	padding: ${props => props.padding || '6px 28px 6px 28px'};
@@ -48,19 +43,6 @@ export const SelectStyled = styled.div<IProps & { isOpen: boolean; disabled: boo
 		path {
 			fill: #a6a6c3;
 		}
-	}
-
-	.balance-divider {
-		background: #f5f5fc;
-		background: -webkit-linear-gradient(to left, #f7fcfd, #f5f5fc);
-		background: linear-gradient(to left, #f7fcfd, #f5f5fc);
-		cursor: default;
-		padding: 6px 38px;
-		font-size: 11px;
-		font-weight: 600;
-		color: grey;
-		text-align: center;
-		letter-spacing: 0.7px;
 	}
 
 	:focus,
@@ -82,16 +64,7 @@ export const SelectStyled = styled.div<IProps & { isOpen: boolean; disabled: boo
 			}
 		`}
 
-	${props =>
-		props.inputType === 'filter' &&
-		css`
-			 {
-				min-height: 47px;
-			}
-		`}
-	
-
-  ${({ disabled, theme }) =>
+	${({ disabled, theme }) =>
 		disabled &&
 		css`
 			 {
@@ -140,7 +113,7 @@ export const SelectStyled = styled.div<IProps & { isOpen: boolean; disabled: boo
 `;
 
 export const SelectPlaceholderStyled = styled.span<ISelectPlaceholderStyled>`
-	color: ${props => (props.grey ? '#DBDBE8' : props.theme.INPUT_PLACEHOLDER_COLOR)};
+	color: ${props => props.theme.INPUT_LABEL_COLOR};
 	font-family: ${({ theme }) => theme.INPUT_FONT};
 	font-size: ${({ theme }) => theme.INPUT_FONT_SIZE};
 	display: inline-flex;
@@ -149,7 +122,6 @@ export const SelectPlaceholderStyled = styled.span<ISelectPlaceholderStyled>`
 	overflow: hidden;
 	max-width: calc(100% - 28px);
 	flex: 1 1 auto;
-	padding: ${props => (props.grey ? '0 8px' : '0')};
 	position: absolute;
 	left: 26px;
 	top: 50%;
@@ -238,8 +210,7 @@ export const SelectOptions = styled.div<Partial<ISelectOptions>>`
 	transition: 0.2s;
 	z-index: 6;
 	min-width: ${props => (props.dropdownType === 'dropdown' ? props.minWidth : '100%')};
-	max-width: ${props =>
-		['select', 'currency', undefined].includes(props.dropdownType) ? props.maxWidth || '100%' : '200%'};
+	max-width: ${props => (props.maxWidth ? props.maxWidth || '100%' : '200%')};
 
 	${({ bottomIsOutside }) =>
 		bottomIsOutside && {
@@ -275,7 +246,7 @@ export const SelectOptionStyled = styled.div<ISelectOptionStyled>`
 	justify-content: flex-start;
 	align-items: center;
 	white-space: nowrap;
-	font-size: ${({ theme, optionType }) => (optionType === 'dropdown-item' ? '1rem' : theme.INPUT_FONT_SIZE)};
+	font-size: ${({ theme }) => theme.INPUT_FONT_SIZE};
 	font-family: ${props => props.theme.INPUT_FONT};
 	letter-spacing: 0.5px;
 
@@ -286,10 +257,8 @@ export const SelectOptionStyled = styled.div<ISelectOptionStyled>`
 	}
 
 	:hover {
-		color: ${({ dropdownType, theme }) =>
-			dropdownType !== 'select' ? theme.DROPDOWN_ITEM_COLOR : theme.DEFAULT_FONT_COLOR_ACTIVE};
-		background-color: ${({ dropdownType, theme }) =>
-			dropdownType !== 'select' ? '#eff8ff' : theme.DROPDOWN_ITEM_BACKGROUND_COLOR};
+		color: ${({ theme }) => theme.DEFAULT_FONT_COLOR_ACTIVE};
+		background-color: ${({ theme }) => theme.DROPDOWN_ITEM_BACKGROUND_COLOR};
 
 		svg:not(.custom) {
 			path {
@@ -297,21 +266,6 @@ export const SelectOptionStyled = styled.div<ISelectOptionStyled>`
 			}
 		}
 	}
-
-	${props =>
-		props.withSubLabel &&
-		css`
-			 {
-				flex-direction: column;
-				align-items: flex-start;
-				color: inherit;
-
-				:hover {
-					color: inherit;
-					background-color: #edf8ff;
-				}
-			}
-		`}
 `;
 
 export const SelectedOption = styled.span<{ multiple: boolean }>`
@@ -332,11 +286,6 @@ export const SelectedOption = styled.span<{ multiple: boolean }>`
 				flex: 0 1 auto;
 				margin: 0 4px 0 0;
 				font-size: 90%;
-				/* padding: 3px 7px;
-				box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset;
-				font-size: 84%;
-				background-color: #f2f3f3;
-				border-radius: 4px; */
 			}
 		`}
 `;
@@ -392,34 +341,6 @@ export const IconContainer = styled.span`
 	justify-content: center;
 `;
 
-export const SearchHeader = styled.div`
-	padding: 10px 31px;
-	border-bottom: 1px solid #eaeaea;
-	display: flex;
-	align-items: center;
-	height: 56px;
-	cursor: default;
-
-	svg,
-	path {
-		fill: #a6a6c3;
-	}
-`;
-
-export const SearchInputHeader = styled.input`
-	position: relative;
-	background-color: transparent;
-	outline: none;
-	border: none;
-	z-index: 1;
-	letter-spacing: 0.5px;
-	font-size: ${({ theme }) => theme.INPUT_FONT_SIZE};
-
-	::placeholder {
-		color: #d2d2e3;
-	}
-`;
-
 export const SelectOptionsContrainer = styled.div<{ optionsHeight: string; overflow: 'true' | 'false' }>`
 	max-height: ${props => props.optionsHeight};
 	/* margin-right: ${props => (props.overflow === 'true' ? '1rem' : '0')}; */
@@ -444,13 +365,6 @@ export const SelectOptionsContrainer = styled.div<{ optionsHeight: string; overf
 	}
 `;
 
-export const OptionSubLabel = styled.div`
-	font-size: 12px;
-	line-height: 16px;
-	letter-spacing: 0.12px;
-	color: #c7c7d6;
-`;
-
 interface ISelectOptions {
 	id: string;
 	children: any;
@@ -461,21 +375,19 @@ interface ISelectOptions {
 	optionsHeight: string;
 	minWidth?: string;
 	maxWidth?: string;
-	dropdownType?: 'select' | 'dropdown' | 'currency';
+	dropdownType?: 'select' | 'dropdown';
 }
 
 interface ISelectOptionStyled {
 	active: boolean;
-	dropdownType?: 'select' | 'dropdown' | 'currency';
+	dropdownType?: 'select' | 'dropdown';
 	optionType: 'select-item' | 'dropdown-item';
-	withSubLabel?: boolean;
 	[key: string]: any;
 }
 
 interface ISelectPlaceholderStyled {
-	grey: boolean;
 	isOpen: boolean;
-	dropdownType?: 'select' | 'dropdown' | 'currency';
+	dropdownType?: 'select' | 'dropdown';
 	value?: string | number | any[] | undefined;
 	errorText?: string | boolean;
 }

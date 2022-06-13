@@ -17,6 +17,10 @@ const common = {
 	BLOCK_BG: '#fff',
 	MODAL_BG: '#fff',
 	SCROLLBAR_COLOR: '#d1d1de',
+	TABLE_COLOR: '#43435f',
+	TABLE_SECONDARY_COLOR: '#79798e',
+	BLOCK_PADDING_SM: '15px',
+	BLOCK_PADDING: '47px',
 	MAX_CONTAINER_WIDTH: '1800px',
 	// BTN
 	BTN_HEIGHT: '54px',
@@ -61,11 +65,7 @@ const common = {
 	DROPDOWN_ITEM_COLOR: '#04051F',
 	// SVG
 	SVG_FILL: '#79798e',
-	SVG_FILL_ACTIVE: '#9c95ff',
-	TABLE_COLOR: '#43435f',
-	TABLE_SECONDARY_COLOR: '#79798e',
-	BLOCK_PADDING_SM: '15px',
-	BLOCK_PADDING: '47px'
+	SVG_FILL_ACTIVE: '#9c95ff'
 };
 
 export const themes = {

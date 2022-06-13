@@ -64,7 +64,7 @@ export const InputStyled = styled.input<IProps>`
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
-		background-image: url('../../assets/icons/checkIcon.svg');
+		background-image: url('/icons/checkIcon.svg');
 		background-size: 0;
 		padding: 0;
 		border: 2px solid;
@@ -78,7 +78,7 @@ export const InputStyled = styled.input<IProps>`
 			uncheck &&
 			css`
 				 {
-					background-image: url('../../assets/icons/uncheck.svg');
+					background-image: url('/icons/uncheck.svg');
 				}
 			`}
 
@@ -91,8 +91,8 @@ export const InputStyled = styled.input<IProps>`
 		}
 	}
 
-	${({ switcher, smallSwitcher }) =>
-		(switcher || smallSwitcher) &&
+	${({ switcher }) =>
+		switcher &&
 		css`
 			 {
 				display: none !important;

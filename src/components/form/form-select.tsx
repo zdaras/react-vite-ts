@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
 
-import Select, { IProps as ISelectProps } from '@/components/library/select';
+import Select, { IProps as ISelectProps } from '@/components/library/select/select';
 
 import { FormInputWrapper } from './form-styled';
 import ErrorText from './error';

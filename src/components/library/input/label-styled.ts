@@ -10,7 +10,7 @@ export const LabelStyled = styled.label<IProps>`
 	align-items: center;
 
 	& > label.input-label:not([input-type='checkbox']):not([input-type='radio']) {
-		color: #dbdbe6;
+		color: ${({ theme }) => theme.INPUT_LABEL_COLOR};
 		position: absolute;
 		left: 25px;
 		top: 50%;
@@ -75,46 +75,9 @@ export const LabelStyled = styled.label<IProps>`
 		}
 	}
 
-	.smallSwitcher {
-		width: 33px;
-		height: 16px;
-		background: #efeff8;
-		padding: 0;
-		position: relative;
-		display: block;
-		cursor: pointer;
-		border-radius: 100px;
-		transition: box-shadow 0.2s ease-out 0.02s, border-color 0.2s ease-out;
-
-		&:after {
-			background: #c2c2cc;
-			position: absolute;
-			top: -3px;
-			left: 0;
-			content: '';
-			transform: translateX(0);
-			transition: all 0.2s ease-out;
-			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-			border-radius: 100px;
-			height: 20px;
-			width: 20px;
-		}
-	}
-
-	input:checked {
-		& + .smallSwitcher {
-			background-color: #edf8ff;
-			&::after {
-				background-color: #2590f7;
-				left: 14px;
-			}
-		}
-	}
-
 	&[type='checkbox'][disabled] > input,
 	&[type='checkbox'][disabled] > label,
-	&[type='checkbox'][disabled] > .switcher,
-	&[type='checkbox'][disabled] > .smallSwitcher {
+	&[type='checkbox'][disabled] > .switcher {
 		opacity: 0.5;
 		cursor: not-allowed !important;
 	}
