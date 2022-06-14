@@ -320,7 +320,8 @@ export const OptionIcon = styled.span`
 	width: 27px;
 	height: 27px;
 
-	img {
+	img,
+	svg {
 		width: 27px;
 		height: 27px;
 	}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { DropdownArrowIcon } from '@/components/icons';
+import { ReactComponent as CheckIcon } from '@/assets/icons/checkIcon.svg';
 
 import {
 	SelectStyled,
@@ -18,7 +19,7 @@ import {
 	OptionIcon
 } from './select-styled';
 
-const emptyOption = { label: 'Clear', value: null, logo: '/icons/checkIcon.svg' };
+const emptyOption = { label: 'Clear', value: null };
 
 export class Select extends Component<IProps, IState> {
 	private container = React.createRef<HTMLDivElement>();
@@ -300,9 +301,9 @@ export class Select extends Component<IProps, IState> {
 										active={selectedIndex === -1}
 										dropdownType={dropdownType}
 									>
-										{emptyOption.logo && withIcon && (
+										{withIcon && (
 											<OptionIcon>
-												<img alt="icon" src={emptyOption.logo} />
+												<CheckIcon className="custom" />
 											</OptionIcon>
 										)}
 										<OptionLabel>{emptyOption.label}</OptionLabel>
