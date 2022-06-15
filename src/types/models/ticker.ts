@@ -6,7 +6,7 @@ export const AssetSchema = ts.type({
 		explorer: ts.string,
 		id: ts.string,
 		marketCapUsd: ts.string,
-		maxSupply: ts.string,
+		maxSupply: ts.union([ts.null, ts.string]),
 		name: ts.string,
 		priceUsd: ts.string,
 		rank: ts.string,

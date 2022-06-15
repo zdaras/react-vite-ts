@@ -16,9 +16,9 @@ type ThunkAction<R, S, E, A extends ReduxAction> = (
 
 export type ThunkA<Return = void, A extends AnyAction = AnyAction> = ThunkAction<Return, IRootStore, undefined, A>;
 
-export interface Action<T = string, P = any> {
+export interface Action<T = string, Payload = any> {
 	type?: T;
-	payload?: P;
+	payload?: Payload;
 }
 
 export type ThenArg<T> = T extends Promise<infer U> ? U : T extends (...args: any[]) => Promise<infer U> ? U : T;
@@ -43,4 +43,6 @@ export interface IOtp {
 	otp?: string;
 }
 
-export type FC<P = Record<string, any>> = FunctionComponent<P & { children?: JSX.Element | ReactNode }>;
+export type FC<Props = Record<string, any>> = FunctionComponent<Props & { children?: JSX.Element | ReactNode }>;
+
+export type IParam<T extends (...args: any) => any> = Parameters<T>[0];

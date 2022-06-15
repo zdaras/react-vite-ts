@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import { FC, memo } from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 
 export const Helmet: FC<IProps> = ({ title = '', description = '' }) => (

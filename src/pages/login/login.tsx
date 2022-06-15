@@ -8,16 +8,17 @@ import { BlockStyled, H1 } from '@/styled/shared';
 import { Flex, FlexItem } from '@/styled/flex';
 import { required, isEmail } from '@/utils/validator';
 import { userActions } from '@/store/ducks/user';
-import { useActions, useApiFormSubmit, useTranslation } from '@/hooks';
+import { useActions, useApi, useTranslation } from '@/hooks';
+import { IParam } from '@/types';
 
 const Login = () => {
 	const { t } = useTranslation();
 	const { state } = useLocation();
 	const redirect = (state as any)?.from?.pathname || '/';
 	const login = useActions(userActions.login);
-	const { call, loading, formError } = useApiFormSubmit(login);
+	const { call, loading, formError } = useApi(login, undefined, false);
 
-	const onSubmit = async (values: Parameters<typeof call>[0]) => call(values, redirect);
+	const onSubmit = async (values: IParam<typeof call>) => call(values, redirect);
 
 	return (
 		<>
@@ -47,7 +48,7 @@ const Login = () => {
 
 							<ErrorText center multiline formError={formError} />
 
-							<Button type="submit" text={t('Login')} margin="0 0 20px" loading={loading} />
+							<Button type="submit" text={t('Login')} margin="25px 0" loading={loading} />
 
 							<Link to="/register">
 								<Button buttonType="text" text={t('Sign Up')} />

@@ -8,14 +8,15 @@ import Helmet from '@/components/shared/helmet';
 import { isEmail, isValidPassword } from '@/utils/validator';
 import { userActions } from '@/store/ducks/user';
 import useActions from '@/hooks/useActions';
-import { useTranslation, useApiFormSubmit } from '@/hooks';
+import { useTranslation, useApi } from '@/hooks';
+import { IParam } from '@/types';
 
 const Register = () => {
 	const { t } = useTranslation();
 	const register = useActions(userActions.register);
-	const { call, formError, loading } = useApiFormSubmit(register);
+	const { call, formError, loading } = useApi(register, undefined, false);
 
-	const onSubmit = async (values: Parameters<typeof call>[0]) => call(values);
+	const onSubmit = async (values: IParam<typeof call>) => call(values);
 
 	return (
 		<>

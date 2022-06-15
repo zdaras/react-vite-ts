@@ -5,14 +5,15 @@ import { Link } from '@/components/library/link';
 import Button from '@/components/library/button';
 import Helmet from '@/components/shared/helmet';
 import Api from '@/services/api';
-import { useApiFormSubmit, useTranslation } from '@/hooks';
+import { useApi, useTranslation } from '@/hooks';
 import { required } from '@/utils/validator';
+import { IParam } from '@/types';
 
 const Forgot = () => {
 	const { t } = useTranslation();
-	const { call, formError, loading, success } = useApiFormSubmit(Api.user.sendRecoveryEmail);
+	const { call, formError, loading, success } = useApi(Api.user.sendRecoveryEmail, undefined, false);
 
-	const onSubmit = async (values: Parameters<typeof call>[0]) => call(values);
+	const onSubmit = async (values: IParam<typeof call>) => call(values);
 
 	return (
 		<>

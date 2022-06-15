@@ -4,5 +4,5 @@ import { decode } from '@/utils/io-ts';
 import { get } from '../axios';
 
 export default {
-	getAsset: ({ coin }: { coin?: any }) => get(`assets/${coin}`).then(decode(AssetSchema))
+	getAsset: ({ coin }: { coin?: string }) => get(`assets/${coin}`).then(decode(AssetSchema))
 };

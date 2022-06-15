@@ -9,15 +9,16 @@ import Helmet from '@/components/shared/helmet';
 import { isValidPassword } from '@/utils/validator';
 import { qs } from '@/utils/helpers';
 import { userActions } from '@/store/ducks/user';
-import { useActions, useTranslation, useApiFormSubmit } from '@/hooks';
+import { useActions, useTranslation, useApi } from '@/hooks';
+import { IParam } from '@/types';
 
 const PasswordRecovery = () => {
 	const { t } = useTranslation();
 	const queryParams: { key?: string } = qs.parse(useLocation().search);
 	const recoverPassword = useActions(userActions.recoverPassword);
-	const { call, formError } = useApiFormSubmit(recoverPassword);
+	const { call, formError } = useApi(recoverPassword, undefined, false);
 
-	const onSubmit = async (values: Parameters<typeof call>[0]) => call({ ...values, key: queryParams.key });
+	const onSubmit = async (values: IParam<typeof call>) => call({ ...values, key: queryParams.key });
 
 	return (
 		<>

@@ -1,11 +1,12 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
-import { ThenArg, IPagination } from '@/types';
-import { useEffectOnce } from '@/hooks';
+import { ThenArg, IParam } from '@/types';
+import { useEffectOnce, useFormError } from '@/hooks';
+import { IError } from '@/types/error';
 
-const useApi = <T>(
+const useApi = <T extends (...args: any) => any>(
 	apiCallFunction: T,
-	params = {},
+	params: IParam<typeof apiCallFunction> = {},
 	fetchOnMount = true,
 	initialData: any = [],
 	overridePrevCall = false
@@ -17,6 +18,8 @@ const useApi = <T>(
 	const [fetchCount, setFetchCount] = useState(0);
 	const [requestCount, setRequestCount] = useState(0);
 	const [p, setParameters] = useState(params);
+	const [success, setSuccess] = useState(false);
+	const { formError, setFormError } = useFormError();
 
 	const handleFetch = (result: ThenArg<T>) => {
 		setFetchCount(prev => {
@@ -27,7 +30,7 @@ const useApi = <T>(
 		});
 	};
 
-	const fetchUrl = useCallback(async (par: any = null, withLoading = true) => {
+	const call = async (par?: IParam<typeof apiCallFunction>, withLoading = true) => {
 		try {
 			const newParams = par || params;
 			if (typeof apiCallFunction === 'function') {
@@ -37,6 +40,8 @@ const useApi = <T>(
 				const response: ThenArg<T> = await apiCallFunction(newParams);
 				setError(false);
 				handleFetch(response);
+				setSuccess(true);
+				setFormError();
 
 				return Promise.resolve(response);
 			}
@@ -44,31 +49,33 @@ const useApi = <T>(
 			return Promise.reject();
 		} catch (err) {
 			setError(true);
+			setFormError(err);
 
 			return Promise.reject(err);
 		} finally {
 			setLoading(false);
 			setFetched(true);
 		}
-	}, []);
+	};
 
 	useEffectOnce(() => {
-		if (fetchOnMount) fetchUrl();
+		if (fetchOnMount) call();
 	});
 
-	// @ts-ignore
-	return { data: res, loading, error, fetchUrl, fetched, fetchCount, p, requestCount };
+	return { data: res, loading, error, call, fetched, fetchCount, p, requestCount, success, formError };
 };
 
-type IReturn<T> = {
+type IReturn<T extends (...args: any) => any> = {
 	data: ThenArg<T>;
 	loading: boolean;
 	error: boolean;
-	fetchUrl: T;
+	call: (par?: IParam<T> | undefined, withLoading?: boolean) => Promise<ThenArg<T>>;
 	fetched: boolean;
 	fetchCount: number;
-	p: IPagination;
+	p: IParam<T>;
 	requestCount: number;
+	success: boolean;
+	formError: IError;
 };
 
 export default useApi;
