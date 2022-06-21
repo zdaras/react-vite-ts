@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 
 const useActions = <T>(actions: T, deps: [] = []): typeof actions => {
 	const dispatch = useDispatch();
+
 	return useMemo(() => {
 		if (Array.isArray(actions)) {
 			return actions.map(a => bindActionCreators(a, dispatch));

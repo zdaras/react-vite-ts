@@ -1,8 +1,8 @@
 import { memo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { CopyIcon } from '@/components/icons';
 import { FC } from '@/types';
+import { useTranslation } from '@/hooks';
 
 import { CopyContainer, CopyText } from './copy-styled';
 

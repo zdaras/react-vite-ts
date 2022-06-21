@@ -1,14 +1,13 @@
 import { memo, FC } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import Select, { SelectItem } from '@/components/library/select';
 import Button from '@/components/library/button';
 import { Link } from '@/components/library/link';
 import { LogoutIcon } from '@/components/icons';
-import { appSelectors, appActions } from '@/store/ducks/app';
+import { appActions } from '@/store/ducks/app';
 import { userActions, userSelectors } from '@/store/ducks/user';
-import useActions from '@/hooks/useActions';
+import { useActions, useTranslation } from '@/hooks';
 
 import { HeaderStyled, HeaderLeftMenu, UserIconStyled } from './header-styled';
 
@@ -19,37 +18,26 @@ const UserIcon = () => (
 );
 
 export const Header: FC = () => {
-	const { t, i18n } = useTranslation();
-	const theme = useSelector(appSelectors.theme);
+	const { t, i18n, lang } = useTranslation();
 	const isLoggedIn = useSelector(userSelectors.isLoggedIn);
-	const themeSwitch = useActions(appActions.themeSwitchAction);
-	const logout = useActions(userActions.logout);
-
-	const changeTheme = () => {
-		const themeToSwitch = theme === 'light' ? 'dark' : 'light';
-		themeSwitch(themeToSwitch);
-	};
+	const [themeSwitchAction, logout] = useActions([appActions.themeSwitchAction, userActions.logout]);
 
 	return (
 		<HeaderStyled>
 			<HeaderLeftMenu>
-				<Button buttonType="text" inline onClick={changeTheme}>
+				<Button buttonType="text" inline onClick={themeSwitchAction}>
 					{t('DARK')}
 				</Button>
-				<Button
-					inline
-					buttonType="text"
-					active={i18n.language === 'en-US'}
-					onClick={() => i18n.changeLanguage('en-US')}
-				>
+				<Button inline buttonType="text" active={lang === 'en-US'} onClick={() => i18n.changeLanguage('en-US')}>
 					EN
 				</Button>
-				<Button inline buttonType="text" active={i18n.language === 'ka'} onClick={() => i18n.changeLanguage('ka')}>
+				<Button inline buttonType="text" active={lang === 'ka'} onClick={() => i18n.changeLanguage('ka')}>
 					KA
 				</Button>
 			</HeaderLeftMenu>
+
 			{isLoggedIn ? (
-				<Select Trigger={UserIcon} padding="0" dropdownType="dropdown" borderless>
+				<Select borderless padding="0" dropdownType="dropdown" Trigger={UserIcon}>
 					<SelectItem active onClick={logout}>
 						<span style={{ display: 'flex', alignItems: 'center' }}>
 							<span style={{ marginRight: '12px' }}>{t('Logout')}</span>

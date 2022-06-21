@@ -1,17 +1,17 @@
 import { history } from '@/store';
 import { ThunkA } from '@/types';
 import storage from '@/utils/storage';
-import { IThemeMode, defaultTheme } from '@/styled/themes';
 import { userActions } from '@/store/ducks/user';
 
-import app from '.';
+import app, { appSelectors } from '.';
 
-export const themeSwitchAction =
-	(theme: IThemeMode): ThunkA =>
-	async dispatch => {
-		storage('theme').set(theme);
-		dispatch(app.actions.themeSwitch(theme));
-	};
+export const themeSwitchAction = (): ThunkA => async (dispatch, getState) => {
+	const store = getState();
+	const currentTheme = appSelectors.theme(store);
+	const themeToSwitch = currentTheme === 'light' ? 'dark' : 'light';
+	storage('theme').set(themeToSwitch);
+	dispatch(app.actions.themeSwitch(themeToSwitch));
+};
 
 export const routerPush =
 	(path: string, state?: any): ThunkA =>
@@ -20,8 +20,6 @@ export const routerPush =
 	};
 
 export const initApp = (): ThunkA => async dispatch => {
-	const storageTheme = storage('theme').get();
 	const accessToken = storage('access_token').get();
-	if (storageTheme && storageTheme !== defaultTheme) dispatch(themeSwitchAction(storageTheme));
 	if (accessToken) dispatch(userActions.getCurrentUser());
 };

@@ -2,11 +2,12 @@ import { createSlice, createSelector } from '@reduxjs/toolkit';
 
 import { defaultTheme } from '@/styled/themes';
 import { IRootStore } from '@/store/ducks/root-reducer';
+import storage from '@/utils/storage';
 
 import { IAppState, IThemeSwitchAction } from './app.types';
 import * as actions from './app.actions';
 
-const initialState: IAppState = { theme: defaultTheme };
+const initialState: IAppState = { theme: storage('theme').get() || defaultTheme };
 
 const slice = createSlice({
 	name: 'app',

@@ -1,8 +1,9 @@
-import React, { FC, memo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { FC, memo } from 'react';
+
+import { IError } from '@/types/error';
+import { useTranslation } from '@/hooks';
 
 import { ErrorWrapper, ErrorText as Text } from './form-styled';
-import { IError } from '@/types/error';
 
 export const ErrorText: FC<IProps> = ({
 	text = '',

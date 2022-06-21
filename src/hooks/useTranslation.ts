@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
 
 const useTranslationHook = () => {
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
+	const lang = i18n.language;
 
-	return { t };
+	return { t, i18n, lang };
 };
 
 export default useTranslationHook;

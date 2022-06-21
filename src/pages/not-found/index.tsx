@@ -1,8 +1,7 @@
-import { useTranslation } from 'react-i18next';
-
 import { Flex } from '@/styled/flex';
 import { H1, RouteWrapperStyled, NotFoundWrapperStyled } from '@/styled/shared';
 import Helmet from '@/components/shared/helmet';
+import { useTranslation } from '@/hooks';
 import { ReactComponent as NotFoundIcon } from '@/assets/icons/404_icon.svg';
 
 const NotFound = () => {

@@ -4,8 +4,10 @@ import { FC } from '@/types';
 
 import { AnchorStyled } from './anchor-styled';
 
-export const Anchor: FC<AnchorHTMLAttributes<HTMLAnchorElement>> = ({ children, ...props }) => (
-	<AnchorStyled {...props}>{children}</AnchorStyled>
-);
+export const Anchor: FC<AnchorHTMLAttributes<HTMLAnchorElement> & { text?: string }> = ({
+	children,
+	text = '',
+	...props
+}) => <AnchorStyled {...props}>{text || children}</AnchorStyled>;
 
 export default memo(Anchor);

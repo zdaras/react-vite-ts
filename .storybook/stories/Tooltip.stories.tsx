@@ -7,11 +7,7 @@ export default {
 	component: Ttip
 } as ComponentMeta<typeof Ttip>;
 
-const Template: ComponentStory<typeof Ttip> = ({ ...rest }) => (
-	<div style={{ padding: '50px 100px' }}>
-		<Ttip {...rest} />
-	</div>
-);
+const Template: ComponentStory<typeof Ttip> = ({ ...rest }) => <Ttip {...rest} />;
 
 export const Tooltip = Template.bind({});
 
