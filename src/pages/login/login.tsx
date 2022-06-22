@@ -28,7 +28,7 @@ const Login = () => {
 				<FlexItem flex="0 1 600px">
 					<Form onSubmit={onSubmit}>
 						<BlockStyled formPadding>
-							<H1 weight="600" align="center" margin="0 0 67px">
+							<H1 weight="600" align="center" margin="0 0 67px" role="heading">
 								{t('Log In')}
 							</H1>
 

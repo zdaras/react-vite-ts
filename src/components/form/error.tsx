@@ -20,7 +20,7 @@ export const ErrorText: FC<IProps> = ({
 	const txt = show && errorMessage ? errorMessage : '';
 
 	return (
-		<ErrorWrapper center={center} margin={margin} inForm={inForm} inline={inline} text={txt}>
+		<ErrorWrapper center={center} margin={margin} inForm={inForm} inline={inline} text={txt} role="alert">
 			<Text text={txt} center={center} multiline={multiline} inForm={inForm}>
 				{t(txt, formError.params)}
 			</Text>

@@ -1,5 +1,4 @@
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 
 import App from '@/router/app';
 import { store } from '@/store';
@@ -10,9 +9,7 @@ store.dispatch<any>(appActions.initApp());
 
 const Index = ({ store: st }: any) => (
 	<Provider store={st}>
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
+		<App />
 	</Provider>
 );
 

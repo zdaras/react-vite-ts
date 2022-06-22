@@ -14,3 +14,10 @@ export const store: Store<IRootStore> = createStore({
 	middleware: getDefaultMiddleware => [...getDefaultMiddleware({ serializableCheck: false })],
 	devTools: config.isDev
 });
+
+export const createNewStore = () =>
+	createStore({
+		reducer: rootReducer,
+		middleware: getDefaultMiddleware => [...getDefaultMiddleware({ serializableCheck: false })],
+		devTools: config.isDev
+	});
