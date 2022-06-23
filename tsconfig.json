@@ -3,12 +3,6 @@
 		"baseUrl": "./",
 		"paths": {
 			"@/*": ["src/*"],
-			"@src/*": ["src/*"],
-			"@root/*": ["/*"],
-			"@assets/*": ["src/assets/*"],
-			"@utils/*": ["src/utils/*"],
-			"@components/*": ["src/components/*"],
-			"@pages/*": ["src/pages/*"],
 			"test/*": ["test/*"],
 		},
 		"isolatedModules": true,
@@ -47,5 +41,6 @@
     {
       "path": "./tsconfig.node.json"
     }
-  ]
+  ],
+	"types": ["vitest/globals"]
 }

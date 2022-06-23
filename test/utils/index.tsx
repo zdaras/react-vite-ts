@@ -1,4 +1,4 @@
-import { cleanup, render, RenderOptions } from '@testing-library/react';
+import { cleanup, render, RenderOptions, renderHook, act } from '@testing-library/react';
 import { afterEach, describe, expect, it, assert, test } from 'vitest';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -33,3 +33,5 @@ export { expect };
 export { it };
 export { assert };
 export { test };
+export { renderHook };
+export { act };

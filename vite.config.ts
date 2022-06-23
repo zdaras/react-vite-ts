@@ -1,12 +1,13 @@
 import { resolve } from 'path';
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import { UserConfig } from 'vitest';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 import viteCompression from 'vite-plugin-compression';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
-const testConfig = { globals: true, environment: 'jsdom', setupFiles: './test/setup.ts' };
+const testConfig: UserConfig = { globals: true, environment: 'jsdom', setupFiles: './test/setup.ts' };
 
 export default defineConfig(({ command }) => {
 	if (command === 'serve') {

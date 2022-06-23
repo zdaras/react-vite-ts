@@ -1,9 +1,10 @@
-import React from 'react';
+import { useContext } from 'react';
 
 import { ViewportContext } from '@/context/viewport';
 
 const useViewport = () => {
-	const viewPort = React.useContext(ViewportContext);
+	const viewPort = useContext(ViewportContext);
+
 	return viewPort;
 };
 
