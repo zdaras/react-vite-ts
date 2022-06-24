@@ -16,8 +16,9 @@ export const numberToFixedDown = (n: number | string | null, decimal = 8, lowNum
 
 export const numberToFixedString = (n: number | string | null, decimal = 8) => {
 	if (['undefined', 'null', 'NaN'].includes(String(n))) return '';
+	const numberIsExponential = new RegExp(/[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)/g).test(String(n));
 	const spl = String(numberToFixed(Number(n), decimal)).split('.');
-	if (!spl.length || !spl[1] || String(spl[1]).includes('e')) return numberToFixed(Number(n), decimal);
+	if (!spl.length || !spl[1] || numberIsExponential) return numberToFixed(Number(n), decimal, numberIsExponential);
 	const zerosToAdd = decimal - Number(spl[1]).toPrecision().length;
 	const z = Array.from(Array(zerosToAdd).keys())
 		.map(() => '0')
