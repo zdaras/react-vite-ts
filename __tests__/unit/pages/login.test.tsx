@@ -1,4 +1,4 @@
-import { render, screen } from 'test/utils';
+import { render, screen } from 'tests/unit/utils';
 import Login from '@/pages/login/login';
 
 describe('Login page', () => {

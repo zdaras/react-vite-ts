@@ -3,7 +3,7 @@
 		"baseUrl": "./",
 		"paths": {
 			"@/*": ["src/*"],
-			"test/*": ["test/*"],
+			"tests/*": ["__tests__/*"],
 		},
 		"isolatedModules": true,
 		"strict": true,
@@ -35,7 +35,7 @@
 		"esModuleInterop": true
 	},
 	"compileOnSave": false,
-	"include": ["src/**/*", "test/**/*", ".storybook/**/*", "./vite.config.ts"],
+	"include": ["src/**/*", "__tests__/**/*", ".storybook/**/*", "./vite.config.ts", "./playwright.config.ts", "./postcss.config.js"],
 	"exclude": ["node_modules", "dist"],
 	"references": [
     {

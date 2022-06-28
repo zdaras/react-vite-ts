@@ -1,4 +1,4 @@
-import { renderHook, act } from 'test/utils';
+import { renderHook, act } from 'tests/unit/utils';
 import useModal from '@/hooks/useModal';
 
 describe('useModal test', () => {

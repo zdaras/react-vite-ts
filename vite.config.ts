@@ -7,14 +7,22 @@ import svgr from 'vite-plugin-svgr';
 import viteCompression from 'vite-plugin-compression';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
-const testConfig: UserConfig = { globals: true, environment: 'jsdom', setupFiles: './test/setup.ts' };
+const testConfig: UserConfig = {
+	globals: true,
+	environment: 'jsdom',
+	setupFiles: './__tests__/unit/setup.ts',
+	include: ['**/*.{test,unit}.{js,ts,jsx,tsx}']
+};
 
 export default defineConfig(({ command }) => {
 	if (command === 'serve') {
 		return {
 			publicDir: 'src/assets/root',
 			resolve: {
-				alias: [{ find: '@', replacement: resolve(__dirname, 'src') }]
+				alias: [
+					{ find: '@', replacement: resolve(__dirname, 'src') },
+					{ find: 'tests/', replacement: resolve(__dirname, '__tests__/') }
+				]
 			},
 			plugins: [react(), tsconfigPaths(), svgr()],
 			test: testConfig
@@ -26,7 +34,10 @@ export default defineConfig(({ command }) => {
 			chunkSizeWarningLimit: 1024 // 1MB
 		},
 		resolve: {
-			alias: [{ find: '@', replacement: resolve(__dirname, 'src') }]
+			alias: [
+				{ find: '@', replacement: resolve(__dirname, 'src') },
+				{ find: 'tests/', replacement: resolve(__dirname, '__tests__/') }
+			]
 		},
 		plugins: [
 			react(),
