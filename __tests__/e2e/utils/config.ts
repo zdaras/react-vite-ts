@@ -10,11 +10,11 @@ dotenv.config({ path: `${process.cwd()}/.env.${BUILD_MODE}` });
 export const env = {
 	BUILD_MODE,
 	NODE_ENV: process.env.NODE_ENV,
-	PORT: process.env.VITE_PORT,
+	PORT: process.env.VITE_PORT || 8080,
 	IS_DEV: BUILD_MODE === 'development',
 	IS_TEST: BUILD_MODE === 'test',
 	IS_PROD: BUILD_MODE === 'production',
-	BASE_URL: `http://localhost:${process.env.VITE_PORT}`
+	BASE_URL: `http://localhost:${process.env.VITE_PORT || 8080}`
 };
 
 const webServerCommandList = {
