@@ -19,11 +19,11 @@ export const env = {
 
 const webServerCommandList = {
 	development: 'npm run start',
-	test: 'npm run start:test-server',
-	production: 'npm run start:prod-server'
+	test: 'npm run start-test-server',
+	production: 'npm run start-prod-server'
 };
 
-export const webServerCommand = webServerCommandList[BUILD_MODE];
+export const webServerCommand = webServerCommandList[BUILD_MODE] || webServerCommandList['development'];
 
 export const viewports = {
 	large: { width: 2560, height: 1440 },
