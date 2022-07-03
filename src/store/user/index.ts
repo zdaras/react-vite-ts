@@ -1,16 +1,12 @@
 import create from 'zustand';
 
-import { IUser } from '@/types/models/user';
 import storage from '@/utils/storage';
 import Api from '@/services/api';
 import { setAuthHeader, deleteAuthHeader } from '@/services/api/axios';
 
-const initialState = {
-	userInfo: null,
-	loading: false,
-	isLoggedIn: false,
-	error: false
-};
+import { IUserStore } from './user-types';
+
+const initialState = { userInfo: null, loading: false, isLoggedIn: false };
 
 export const userStore = create<IUserStore>(set => ({
 	...initialState,
@@ -29,24 +25,17 @@ export const userStore = create<IUserStore>(set => ({
 			const refresh_token: string = storage('refresh_token').get();
 			const data = await Api.user.currentUser(access_token);
 			setAuthHeader({ access_token, refresh_token });
-			set({ loading: false, isLoggedIn: true, error: false, userInfo: data });
+			set({ loading: false, isLoggedIn: true, userInfo: data });
 
 			return Promise.resolve();
 		} catch (e) {
-			set({ ...initialState, error: true });
+			set(initialState);
 
 			return Promise.reject(e);
 		}
 	}
 }));
 
-export interface IUserStore {
-	userInfo: IUser | null;
-	loading: boolean;
-	isLoggedIn: boolean;
-	error?: boolean;
-	logout: () => void;
-	getCurrentUser: (withLoading?: boolean) => Promise<any>;
-}
+export { userSelectors } from './user-selectors';
 
 export default userStore;

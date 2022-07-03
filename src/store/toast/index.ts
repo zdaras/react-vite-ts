@@ -2,25 +2,23 @@ import create from 'zustand';
 
 import { randomInt } from '@/utils/number';
 
-const defaultOptions = (): IToast => ({
+const deflt = (options: IPartialToast): IToast => ({
 	id: randomInt(),
 	text: '',
 	type: 'info',
 	autoClose: true,
 	closeOnClick: true,
-	timeout: 5000
+	timeout: 5000,
+	...options
 });
-
-const generateToast = (options: IPartialToast) => ({ ...defaultOptions(), ...options });
 
 export const toastStore = create<IToastStore>((set, get) => ({
 	data: [],
-	info: (text, options = {}) => set({ data: [...get().data, generateToast({ ...options, text, type: 'info' })] }),
-	success: (text, options = {}) => set({ data: [...get().data, generateToast({ ...options, text, type: 'success' })] }),
-	warning: (text, options = {}) => set({ data: [...get().data, generateToast({ ...options, text, type: 'warning' })] }),
-	danger: (text, options = {}) => set({ data: [...get().data, generateToast({ ...options, text, type: 'danger' })] }),
-	processing: (text, options = {}) =>
-		set({ data: [...get().data, generateToast({ ...options, text, type: 'processing' })] }),
+	info: (text, options = {}) => set({ data: [...get().data, deflt({ ...options, text, type: 'info' })] }),
+	success: (text, options = {}) => set({ data: [...get().data, deflt({ ...options, text, type: 'success' })] }),
+	warning: (text, options = {}) => set({ data: [...get().data, deflt({ ...options, text, type: 'warning' })] }),
+	danger: (text, options = {}) => set({ data: [...get().data, deflt({ ...options, text, type: 'danger' })] }),
+	processing: (text, options = {}) => set({ data: [...get().data, deflt({ ...options, text, type: 'processing' })] }),
 	hideToast: toastArg => set({ data: get().data.filter(toast => toast.id !== toastArg.id) }),
 	clearToasts: () => set({ data: [] })
 }));

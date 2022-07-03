@@ -1,12 +1,12 @@
 import { Navigate } from 'react-router-dom';
 
-import { userStore } from '@/store/user';
+import { userStore, userSelectors } from '@/store/user';
 import LoadingLarge from '@/components/shared/loading-large';
 import { FC } from '@/types';
 
 const UserIsNotAuth: FC = ({ children }) => {
-	const isLoggedIn = userStore(store => store.isLoggedIn);
-	const loading = userStore(store => store.loading);
+	const isLoggedIn = userStore(userSelectors.isLoggedIn);
+	const loading = userStore(userSelectors.loading);
 
 	if (loading) return <LoadingLarge loading={loading} />;
 

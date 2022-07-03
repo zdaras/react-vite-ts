@@ -1,13 +1,13 @@
 import { Navigate, useLocation } from 'react-router-dom';
 
-import { userStore } from '@/store/user';
+import { userStore, userSelectors } from '@/store/user';
 import LoadingLarge from '@/components/shared/loading-large';
 import { FC } from '@/types';
 
 const PrivateRoute: FC = ({ children }) => {
 	const location = useLocation();
-	const isLoggedIn = userStore(store => store.isLoggedIn);
-	const loading = userStore(store => store.loading);
+	const isLoggedIn = userStore(userSelectors.isLoggedIn);
+	const loading = userStore(userSelectors.loading);
 
 	if (loading) return <LoadingLarge loading={loading} />;
 

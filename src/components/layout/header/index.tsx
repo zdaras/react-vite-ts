@@ -5,7 +5,7 @@ import Button from '@/components/library/button';
 import { Link } from '@/components/library/link';
 import { LogoutIcon } from '@/components/icons';
 import { appStore } from '@/store/app';
-import { userStore } from '@/store/user';
+import { userStore, userSelectors } from '@/store/user';
 import { useTranslation } from '@/hooks';
 
 import { HeaderStyled, HeaderLeftMenu, UserIconStyled } from './header-styled';
@@ -18,7 +18,7 @@ const UserIcon = () => (
 
 export const Header: FC = () => {
 	const { t, i18n, lang } = useTranslation();
-	const isLoggedIn = userStore(store => store.isLoggedIn);
+	const isLoggedIn = userStore(userSelectors.isLoggedIn);
 	const logout = userStore(store => store.logout);
 	const themeSwitch = appStore(store => store.themeSwitch);
 
