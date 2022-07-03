@@ -400,7 +400,7 @@ Select.defaultProps = {
 	dropdownType: 'select',
 	options: [],
 	label: '',
-	placeholder: 'Choose',
+	placeholder: '',
 	value: '',
 	optionSelectionHandler: () => {},
 	search: false,

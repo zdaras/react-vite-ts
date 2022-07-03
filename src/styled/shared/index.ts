@@ -67,14 +67,15 @@ export const TopRightStyled = styled.div`
 
 export const BlockStyled = styled.div<IBlockStyled>`
 	box-shadow: none;
-	background: ${props => props.theme.BLOCK_BG};
+	background-color: ${({ theme, transparent }) => (transparent ? 'transparent' : theme.BLOCK_BG)};
 	position: relative;
-	height: ${props => props.height || '100%'};
-	padding: ${props => props.padding || props.theme.BLOCK_PADDING};
+	height: ${({ height }) => height || '100%'};
+	padding: ${({ theme, padding }) => padding || theme.BLOCK_PADDING};
+	transition: background-color 0.1s, height 0s;
 
 	@media ${responsive.sm} {
-		padding: ${props => props.padding || props.theme.BLOCK_PADDING_SM};
-		box-shadow: ${props => props.shadow || '0px 3px 24px #9799c129'};
+		padding: ${({ theme, padding }) => padding || theme.BLOCK_PADDING_SM};
+		box-shadow: ${({ shadow }) => shadow || '0px 3px 24px #9799c129'};
 	}
 
 	${({ formPadding }) =>
@@ -292,6 +293,7 @@ interface IBlockStyled {
 	shadow?: string;
 	formPadding?: boolean;
 	height?: string;
+	transparent?: boolean;
 }
 
 interface IH {

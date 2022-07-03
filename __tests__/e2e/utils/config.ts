@@ -1,9 +1,7 @@
 import { devices } from '@playwright/test';
 import dotenv from 'dotenv';
 
-type IBuildMode = 'development' | 'test' | 'production';
-
-const BUILD_MODE = process.env.BUILD_MODE as IBuildMode;
+export const BUILD_MODE = (process.env.BUILD_MODE || 'development') as 'development' | 'test' | 'production';
 
 dotenv.config({ path: `${process.cwd()}/.env.${BUILD_MODE}` });
 
@@ -28,7 +26,9 @@ export const webServerCommand = webServerCommandList[BUILD_MODE] || webServerCom
 export const viewports = {
 	large: { width: 2560, height: 1440 },
 	desktop: { width: 1920, height: 961 },
-	laptop: { width: 1536, height: 746 }
+	mac: { width: 1680, height: 852 },
+	laptop: { width: 1536, height: 746 },
+	smLaptop: { width: 1280, height: 690 }
 };
 
 export const paths = {
@@ -48,6 +48,6 @@ export const desktopProjects = [
 ];
 
 export const mobileProjects = [
-	// { name: 'mobile chrome', use: { ...devices['Pixel 5'] } },
-	// { name: 'mobile safari', use: { ...devices['iPhone 12'] } }
+	{ name: 'mobile chrome - Pixel 5', use: { ...devices['Pixel 5'] } },
+	{ name: 'mobile safari - iPhone 13', use: { ...devices['iPhone 13'] } }
 ];

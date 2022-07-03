@@ -1,20 +1,19 @@
-import React, { memo } from 'react';
-import { useSelector } from 'react-redux';
+import { memo } from 'react';
 
-import { toastSelectors } from '@/store/ducks/toast';
+import { toastStore } from '@/store/toast';
 
 import { ToastContainerStyled } from './toast-styled';
 import Toast from './toast';
 
 export const ToastContainer = () => {
-	const toasts = useSelector(toastSelectors.data);
-	const showToasts = toasts.length > 0;
+	const data = toastStore(store => store.data);
+	const showToasts = data.length > 0;
 
 	if (!showToasts) return null;
 
 	return (
 		<ToastContainerStyled>
-			{toasts.map(toast => (
+			{data.map(toast => (
 				<Toast key={toast.id} toast={toast} />
 			))}
 		</ToastContainerStyled>

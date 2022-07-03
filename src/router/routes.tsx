@@ -6,7 +6,6 @@ import Login from '@/pages/login/login';
 import Register from '@/pages/register/register';
 import Dashboard from '@/pages/dashboard/dashboard';
 import ForgotPassword from '@/pages/forgot-password/forgot-password';
-import PasswordRecovery from '@/pages/password-recovery/password-recovery';
 import NotFound from '@/pages/not-found';
 import { FC } from '@/types';
 
@@ -29,13 +28,6 @@ export const routes: IRoute[] = [
 		path: '/forgot-password',
 		showInMenu: false,
 		Component: ForgotPassword,
-		Layout: BlankLayout,
-		AuthCheck: UserIsNotAuth
-	},
-	{
-		path: '/password-recovery',
-		showInMenu: false,
-		Component: PasswordRecovery,
 		Layout: BlankLayout,
 		AuthCheck: UserIsNotAuth
 	},

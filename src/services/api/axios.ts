@@ -3,8 +3,7 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import storage from '@/utils/storage';
 import { ILoginResponse } from '@/types/models/user';
 import { IError } from '@/types/error';
-import { userActions } from '@/store/ducks/user';
-import { store } from '@/store';
+import { userStore } from '@/store/user';
 import config from '@/utils/config';
 
 export const otpHeader = 'x-as-otp';
@@ -41,7 +40,7 @@ function getAuthToken(refreshToken: string) {
 }
 
 const requestInterceptor = (cfg: AxiosRequestConfig) => {
-	if (cfg.data && !(cfg.data instanceof FormData) && !(cfg.data instanceof URLSearchParams)) {
+	if (cfg.data && cfg.data.otp && !(cfg.data instanceof FormData) && !(cfg.data instanceof URLSearchParams)) {
 		const { otp, ...data } = cfg.data;
 		cfg.data = data;
 		if (![undefined, null].includes(otp) && cfg.headers) cfg.headers[otpHeader] = otp; // transfer 2fa code from params to header
@@ -70,7 +69,7 @@ const responseErrorInterceptor = async (error: AxiosError<IError>) => {
 					return instance(originalRequest);
 				}
 			} catch (err: any) {
-				store.dispatch<any>(userActions.logout());
+				userStore.getState().logout();
 				return Promise.reject(err?.response?.data);
 			}
 		} else {

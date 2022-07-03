@@ -1,6 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 
-import { IToast } from '@/store/ducks/toast/toast.types';
+import { IToast } from '@/store/toast';
+import { responsive } from '@/styled/responsive';
 
 interface IToastStyled {
 	type: IToast['type'];
@@ -29,6 +30,13 @@ export const ToastContainerStyled = styled.div`
 	max-height: 100vh;
 	display: flex;
 	flex-direction: column;
+
+	@media ${responsive.sm} {
+		left: 0;
+		right: 0;
+		width: 100%;
+		bottom: 0;
+	}
 `;
 
 export const ToastStyled = styled.div<IToastStyled>`
@@ -39,7 +47,7 @@ export const ToastStyled = styled.div<IToastStyled>`
 	animation: ${animationRule};
 	z-index: 3;
 	word-wrap: break-word;
-	width: 430px;
+	width: 380px;
 	max-width: 90vw;
 	border-radius: 16px;
 	overflow: hidden;
@@ -47,22 +55,29 @@ export const ToastStyled = styled.div<IToastStyled>`
 	max-height: 150px;
 	cursor: pointer;
 
-	background: ${({ type }) => {
+	background: ${({ type, theme }) => {
 		switch (type) {
 			case 'info':
 				return '#73c8ff';
 			case 'success':
 				return '#edf8f0';
 			case 'warning':
-				return '#ffc107';
+				return theme.YELLOW;
 			case 'danger':
-				return '#f96363d1';
+				return theme.RED;
 			case 'processing':
 				return '#E5F4FF';
 			default:
 				return '#73c8ff';
 		}
 	}};
+
+	@media ${responsive.sm} {
+		max-width: 100%;
+		width: 100%;
+		border-radius: 0;
+		margin-bottom: 0;
+	}
 `;
 
 export const ToastIconStyled = styled.div<IToastStyled>`
@@ -103,6 +118,7 @@ export const ToastIconStyled = styled.div<IToastStyled>`
 export const ToastTextStyled = styled.div`
 	padding: 20px 22px;
 	user-select: none;
+	flex: 1;
 
 	span {
 		font-size: 14px;

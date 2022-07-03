@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { FormInput, ErrorText, Form } from '@/components/form';
 import { Link } from '@/components/library/link';
@@ -7,18 +7,31 @@ import Helmet from '@/components/shared/helmet';
 import { BlockStyled, H1 } from '@/styled/shared';
 import { Flex, FlexItem } from '@/styled/flex';
 import { required, isEmail } from '@/utils/validator';
-import { userActions } from '@/store/ducks/user';
-import { useActions, useApi, useTranslation } from '@/hooks';
+import { userStore } from '@/store/user';
+import { useTranslation, useFormError } from '@/hooks';
 import { IParam } from '@/types';
+import Api from '@/services/api';
+import { setAuthHeader } from '@/services/api/axios';
 
 const Login = () => {
 	const { t } = useTranslation();
+	const { formError, setFormError } = useFormError();
 	const { state } = useLocation();
-	const redirect = (state as any)?.from?.pathname || '/';
-	const login = useActions(userActions.login);
-	const { call, loading, formError } = useApi(login, undefined, false);
+	const navigate = useNavigate();
+	const redirect = (state as any)?.from?.pathname;
+	const getCurrentUser = userStore(store => store.getCurrentUser);
+	const loading = userStore(store => store.loading);
 
-	const onSubmit = async (values: IParam<typeof call>) => call(values, redirect);
+	const onSubmit = async (values: IParam<typeof Api.user.login>) => {
+		try {
+			const res = await Api.user.login(values);
+			setAuthHeader(res);
+			await getCurrentUser(false);
+			if (redirect) navigate(redirect);
+		} catch (error) {
+			setFormError(error);
+		}
+	};
 
 	return (
 		<>
