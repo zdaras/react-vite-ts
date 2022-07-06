@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import { FC } from 'react';
+import styled from 'styled-components';
 
 import { Flex } from '@/styled/flex';
 
@@ -13,29 +13,25 @@ const LoadingContainer = styled.div`
 	background: ${({ theme }) => theme.BG_COLOR};
 `;
 
-const buttonLoader = keyframes`
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-`;
-
-const animationRule = css`
-	${buttonLoader} 0.6s linear infinite
-`;
-
 export const Loading = styled.div<{ width?: string; height?: string; margin?: string }>`
+	@keyframes L {
+		0% {
+			-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		100% {
+			-webkit-transform: rotate(360deg);
+			transform: rotate(360deg);
+		}
+	}
+
 	width: ${({ width }) => width || '67px'};
 	height: ${({ height }) => height || '67px'};
 	margin: ${({ margin }) => margin || '25px'};
 	border-radius: 100%;
 	border: 4px solid #e5f4ff;
 	border-right-color: #1d93f7;
-	animation: ${animationRule};
+	animation: L 0.6s linear infinite;
 `;
 
 export const LoadingLarge: FC<IProps> = ({ loading }) => (

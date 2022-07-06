@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { ITab, IPanel } from '@/types/tabs';
 import { FC } from '@/types';
@@ -6,7 +6,7 @@ import { FC } from '@/types';
 import { Tab } from './tab.styled';
 import { TabMenu } from './inline.styled';
 
-export const Tabs = ({ selected: selectedProps, children }: ITab) => {
+export const Tabs = ({ selected: selectedProps, children = [] }: ITab) => {
 	const initialSelected = selectedProps || (children && children[0] ? 0 : 1);
 	const [selected, setSelected] = useState<number>(initialSelected);
 	const [active, setActive] = useState<string>('');
@@ -26,25 +26,19 @@ export const Tabs = ({ selected: selectedProps, children }: ITab) => {
 	return (
 		<div style={{ overflow: overflow || 'initial' }} className="tabs">
 			<TabMenu>
-				{children &&
-					children.map((elem, index) => {
-						if (!elem) return null;
-						const style = index === selected ? 'selected' : '';
+				{children.map((elem, index) => {
+					if (!elem) return null;
 
-						return (
-							<li
-								key={index}
-								className={style}
-								onKeyDown={() => handleChange(index)}
-								onClick={() => handleChange(index)}
-							>
-								{elem?.props?.title}
-							</li>
-						);
-					})}
+					return (
+						<li key={index} className={index === selected ? 'selected' : ''} onClick={() => handleChange(index)}>
+							{elem.props?.title}
+						</li>
+					);
+				})}
 			</TabMenu>
+
 			<Tab>
-				<div className={active}>{children[selected]}</div>
+				<div className={active}>{children[selected] as ReactNode}</div>
 			</Tab>
 		</div>
 	);

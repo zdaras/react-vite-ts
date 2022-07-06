@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import { IColumn } from '@/types/table';
 
-import { Cell, Row } from '../index';
+import { Cell, Row } from './index';
 
 export const TableHeader: FC<IProps> = ({ headers }) => (
 	<Row>

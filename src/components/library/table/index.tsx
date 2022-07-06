@@ -1,11 +1,8 @@
 import { IDataGrid } from '@/types/table';
 import { TableComp, TableContainer } from '@/styled/shared/table';
 
-import TableHeader from './gg-grid-header';
-import TableBody from './gg-grid-body';
-
-export { default as Cell } from './cell';
-export { default as Row } from './row';
+import TableHeader from './table-header';
+import TableBody from './table-body';
 
 export function Table<T>({
 	headers,
@@ -50,5 +47,8 @@ Table.defaultProps = {
 	hoverable: true,
 	containerProps: {}
 } as Partial<IProps>;
+
+export { default as Cell } from './cell';
+export { default as Row } from './row';
 
 export default Table;

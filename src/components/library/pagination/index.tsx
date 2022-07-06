@@ -7,7 +7,7 @@ import { StyledPagination } from './pagnation.styled';
 
 export const Pagination: FC<IProps> = ({ size, params, onPageChange }) => {
 	if (!size || !params.limit) return null;
-	const paginate = generatePageRange(params.startPage, size, params.limit) || [];
+	const paginate = generatePageRange(params.startPage || 0, size, params.limit) || [];
 
 	return (
 		<StyledPagination hidden={!paginate.length}>

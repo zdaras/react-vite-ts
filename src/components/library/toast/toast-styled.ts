@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import { IToast } from '@/store/toast';
 import { responsive } from '@/styled/responsive';
@@ -6,21 +6,6 @@ import { responsive } from '@/styled/responsive';
 interface IToastStyled {
 	type: IToast['type'];
 }
-
-const fade = keyframes({
-	from: {
-		opacity: 0,
-		transform: 'scale(0.97)'
-	},
-	to: {
-		opacity: 1,
-		transform: 'scale(1)'
-	}
-});
-
-const animationRule = css`
-	${fade} 0.5s
-`;
 
 export const ToastContainerStyled = styled.div`
 	position: fixed;
@@ -40,11 +25,22 @@ export const ToastContainerStyled = styled.div`
 `;
 
 export const ToastStyled = styled.div<IToastStyled>`
+	@keyframes fade {
+		0% {
+			opacity: 0;
+			transform: scale(0.97);
+		}
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
 	position: relative;
 	display: flex;
 	align-items: center;
 	transition: all 0.3s ease-in-out;
-	animation: ${animationRule};
+	animation: fade 0.5s;
 	z-index: 3;
 	word-wrap: break-word;
 	width: 380px;
