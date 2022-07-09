@@ -1,10 +1,10 @@
 import { ReactNode, useState } from 'react';
 
-import { ITab, IPanel } from '@/types/tabs';
 import { FC } from '@/types';
 
 import { Tab } from './tab.styled';
 import { TabMenu } from './inline.styled';
+import { ITab, IPanel } from './tabs-types';
 
 export const Tabs = ({ selected: selectedProps, children = [] }: ITab) => {
 	const initialSelected = selectedProps || (children && children[0] ? 0 : 1);
@@ -28,11 +28,12 @@ export const Tabs = ({ selected: selectedProps, children = [] }: ITab) => {
 			<TabMenu>
 				{children.map((elem, index) => {
 					if (!elem) return null;
+					const className = index === selected ? 'tab-title selected' : 'tab-title';
 
 					return (
-						<li key={index} className={index === selected ? 'selected' : ''} onClick={() => handleChange(index)}>
+						<div key={index} className={className} onClick={() => handleChange(index)}>
 							{elem.props?.title}
-						</li>
+						</div>
 					);
 				})}
 			</TabMenu>

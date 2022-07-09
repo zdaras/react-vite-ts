@@ -1,18 +1,9 @@
 import styled from 'styled-components';
 
-import { responsive } from '@/styled/responsive';
-
-export const TabMenu = styled.ul`
-	list-style: none;
+export const TabMenu = styled.div`
 	padding: 0;
-	margin-bottom: 0;
-	-webkit-margin-before: 0;
-	-webkit-margin-after: 0;
-	-webkit-margin-start: 0px;
-	-webkit-margin-end: 0px;
-	-webkit-padding-start: 0px;
 
-	li {
+	.tab-title {
 		padding: 10px 80px 10px 0;
 		display: inline-block;
 		text-align: left;
@@ -22,12 +13,6 @@ export const TabMenu = styled.ul`
 		cursor: pointer;
 		color: ${({ theme }) => theme.DEFAULT_FONT_COLOR};
 		position: relative;
-
-		@media ${responsive.md} {
-			padding: 10px 0;
-			display: block;
-			text-align: center;
-		}
 
 		&::before {
 			content: '';
