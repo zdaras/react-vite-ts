@@ -17,5 +17,3 @@ export const AssetSchema = ts.type({
 	}),
 	timestamp: ts.number
 });
-
-export type IBtcUsd = ts.TypeOf<typeof AssetSchema>;

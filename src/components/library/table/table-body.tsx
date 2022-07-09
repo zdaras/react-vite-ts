@@ -1,10 +1,9 @@
 import { FC } from 'react';
 
-import { IDataGrid } from '@/types/table';
-
+import { ITableProps } from './table-types';
 import { Cell, Row } from './index';
 
-export const TableBody: FC<IDataGrid> = ({ data = [], onClick }) => (
+export const TableBody: FC<ITableProps> = ({ data = [], onClick }) => (
 	<>
 		{data.map((item, index) => (
 			<Row key={`data-row-${index}`} onClick={onClick} item={item} index={index}>

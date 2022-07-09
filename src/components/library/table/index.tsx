@@ -1,8 +1,7 @@
-import { IDataGrid } from '@/types/table';
-import { TableComp, TableContainer } from '@/styled/shared/table';
-
 import TableHeader from './table-header';
 import TableBody from './table-body';
+import { ITableProps } from './table-types';
+import { TableComp, TableContainer } from './table-styled';
 
 export function Table<T>({
 	headers,
@@ -11,17 +10,17 @@ export function Table<T>({
 	renderHeader,
 	renderBody,
 	onClick,
-	withIcon,
 	hoverable,
 	overflow,
 	containerProps
 }: IProps<T>) {
 	return (
 		<TableContainer overflow={overflow} {...containerProps}>
-			<TableComp withIcon={withIcon} hoverable={hoverable}>
+			<TableComp hoverable={hoverable}>
 				{showHeader && headers && headers.length > 0 && (
 					<thead>{renderHeader ? renderHeader(headers) : <TableHeader headers={headers} />}</thead>
 				)}
+
 				{data && data.length > 0 && (
 					<tbody>
 						{renderBody ? (
@@ -36,14 +35,13 @@ export function Table<T>({
 	);
 }
 
-type IProps<T = Record<string, any>> = IDataGrid<T>;
+type IProps<T = Record<string, any>> = ITableProps<T>;
 
 Table.defaultProps = {
 	headers: [],
 	data: [],
 	showHeader: true,
 	onClick: () => {},
-	withIcon: false,
 	hoverable: true,
 	containerProps: {}
 } as Partial<IProps>;

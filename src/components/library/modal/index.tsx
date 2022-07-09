@@ -22,6 +22,7 @@ const Modal: FC<IProps> = ({
 	minWidth
 }) => {
 	const [fadeType, setFadeType] = useState<'in' | 'out'>('out');
+	const showTopPanel = title || closeIcon;
 
 	const handleClose = (e: any) => {
 		if (!closable) return;
@@ -48,16 +49,19 @@ const Modal: FC<IProps> = ({
 					fadeType={fadeType}
 					minWidth={minWidth}
 				>
-					<ModalTopPanel hidden={!title && !closeIcon} centerTitle={centerTitle}>
-						<ModalTitle>
-							<H2>{title}</H2>
-						</ModalTitle>
-						{closeIcon && (
-							<Close onClick={handleClose}>
-								<CloseIcon className="custom" />
-							</Close>
-						)}
-					</ModalTopPanel>
+					{showTopPanel && (
+						<ModalTopPanel centerTitle={centerTitle}>
+							<ModalTitle>
+								<H2>{title}</H2>
+							</ModalTitle>
+							{closeIcon && (
+								<Close onClick={handleClose}>
+									<CloseIcon className="custom" />
+								</Close>
+							)}
+						</ModalTopPanel>
+					)}
+
 					{children}
 				</ModalBody>
 			</ModalBackgroundStyled>,
@@ -79,7 +83,6 @@ export interface IProps {
 	overflow?: string;
 	closable?: boolean;
 	centerTitle?: boolean;
-	confirmClose?: boolean;
 	minWidth?: string;
 }
 
@@ -89,8 +92,7 @@ Modal.defaultProps = {
 	closeIcon: true,
 	size: 'default',
 	closable: true,
-	centerTitle: false,
-	confirmClose: false
+	centerTitle: false
 } as Partial<IProps>;
 
 export default Modal;
