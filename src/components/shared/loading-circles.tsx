@@ -1,29 +1,25 @@
-import React, { FC } from 'react';
-import styled, { css, keyframes } from 'styled-components';
-
-const L = keyframes`
-   0%   { 
-    transform: scale(0.5);
-    background: #edf8ff;
-  }
-  50%   { 
-    transform: scale(0.88);
-    background: white;
-  }
-  100% { 
-    transform: scale(0.5);
-    background: #edf8ff;
-  }
-`;
-
-const animationRule = css`
-	${L} 1s linear infinite
-`;
+import { FC } from 'react';
+import styled from 'styled-components';
 
 const Loading = styled.div`
 	display: inline-flex;
 	padding: 0 10px;
 	align-items: center;
+
+	@keyframes L {
+		0% {
+			transform: scale(0.5);
+			background: #edf8ff;
+		}
+		50% {
+			transform: scale(0.88);
+			background: white;
+		}
+		100% {
+			transform: scale(0.5);
+			background: #edf8ff;
+		}
+	}
 
 	div {
 		position: relative;
@@ -32,7 +28,7 @@ const Loading = styled.div`
 		border: 2px solid #1d93f7c4;
 		border-radius: 100%;
 		transform: transformZ(0);
-		animation: ${animationRule};
+		animation: L 1s linear infinite;
 
 		&:nth-child(1n) {
 			left: -10px;

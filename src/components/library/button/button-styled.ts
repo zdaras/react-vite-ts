@@ -1,21 +1,6 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { IProps } from './index';
-
-const buttonLoader = keyframes`
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-`;
-
-const animationRule = css`
-	${buttonLoader} 0.6s linear infinite
-`;
 
 export const ButtonStyled = styled.button<IProps>`
 	position: relative;
@@ -67,13 +52,22 @@ export const ButtonStyled = styled.button<IProps>`
 			cursor: not-allowed;
 			opacity: 0.4;
 		`}
-
-	${({ loading, buttonType, theme }) =>
+		
+		${({ loading, buttonType, theme }) =>
 		loading &&
 		css`
 			pointer-events: none;
 			color: transparent !important;
 			opacity: 0.8;
+
+			@keyframes loader {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
 
 			::after {
 				position: absolute;
@@ -86,10 +80,9 @@ export const ButtonStyled = styled.button<IProps>`
 				border-radius: 500rem;
 				border-top: ${buttonType !== 'text' ? `2px solid ${theme.BTN_COLOR}` : `2px solid ${theme.BTN_BG_COLOR}`};
 				border-right: 2px solid transparent;
-				animation: ${animationRule};
+				animation: loader 0.6s linear infinite;
 			}
 		`}
-
 
 	${({ buttonType, height, padding }) => {
 		switch (buttonType) {

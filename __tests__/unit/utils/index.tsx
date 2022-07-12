@@ -1,9 +1,7 @@
 import { cleanup, render, RenderOptions, renderHook, act } from '@testing-library/react';
 import { afterEach, describe, expect, it, assert, test } from 'vitest';
-import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import { createNewStore } from '@/store';
 import '@/services/locale/i18n';
 
 afterEach(() => {
@@ -14,13 +12,7 @@ const customRender = (ui: React.ReactElement, options: RenderOptions = {}) =>
 	render(ui, {
 		// wrap provider(s) here if needed
 		wrapper: ({ children }) => {
-			const store = createNewStore();
-
-			return (
-				<Provider store={store}>
-					<BrowserRouter>{children}</BrowserRouter>
-				</Provider>
-			);
+			return <BrowserRouter>{children}</BrowserRouter>;
 		},
 		...options
 	});

@@ -1,14 +1,12 @@
-import { useSelector } from 'react-redux';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 import ThemeProvider from '@/styled/theme-provider';
 import ToastContainer from '@/components/library/toast';
-import { appSelectors } from '@/store/ducks/app';
-
-import { routes } from './routes';
+import { appStore } from '@/store/app';
+import { routes } from '@/router/routes';
 
 const App = () => {
-	const theme = useSelector(appSelectors.theme);
+	const theme = appStore(state => state.theme);
 
 	return (
 		<BrowserRouter>

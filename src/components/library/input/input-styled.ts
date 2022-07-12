@@ -68,7 +68,7 @@ export const InputStyled = styled.input<IProps>`
 		background-size: 0;
 		padding: 0;
 		border: 2px solid;
-		border-color: ${({ theme }) => theme.INPUT_BORDER_COLOR};
+		border-color: ${({ theme }) => theme.INPUT_LABEL_COLOR};
 		border-radius: 100%;
 		background-position: center;
 		cursor: pointer;

@@ -1,16 +1,14 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
 
-import Copy from '@/components/library/copy/copy-ellipsis';
+import CopyEllipsis from '@/components/library/copy/copy-ellipsis';
 
 export default {
 	title: 'Copy',
-	component: Copy
-} as ComponentMeta<typeof Copy>;
+	component: CopyEllipsis
+} as ComponentMeta<typeof CopyEllipsis>;
 
-const Template: ComponentStory<typeof Copy> = ({ ...rest }) => <Copy {...rest} />;
-
-export const Primary = Template.bind({});
-
-Primary.args = {
-	text: 'Text to copy'
+export const Copy: ComponentStoryObj<typeof CopyEllipsis> = {
+	args: {
+		text: 'Text to copy'
+	}
 };

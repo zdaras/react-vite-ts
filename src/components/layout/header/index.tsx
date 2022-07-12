@@ -1,13 +1,12 @@
 import { memo, FC } from 'react';
-import { useSelector } from 'react-redux';
 
 import Select, { SelectItem } from '@/components/library/select';
 import Button from '@/components/library/button';
 import { Link } from '@/components/library/link';
 import { LogoutIcon } from '@/components/icons';
-import { appActions } from '@/store/ducks/app';
-import { userActions, userSelectors } from '@/store/ducks/user';
-import { useActions, useTranslation } from '@/hooks';
+import { appStore } from '@/store/app';
+import { userStore, userSelectors } from '@/store/user';
+import { useTranslation } from '@/hooks';
 
 import { HeaderStyled, HeaderLeftMenu, UserIconStyled } from './header-styled';
 
@@ -19,13 +18,14 @@ const UserIcon = () => (
 
 export const Header: FC = () => {
 	const { t, i18n, lang } = useTranslation();
-	const isLoggedIn = useSelector(userSelectors.isLoggedIn);
-	const [themeSwitchAction, logout] = useActions([appActions.themeSwitchAction, userActions.logout]);
+	const isLoggedIn = userStore(userSelectors.isLoggedIn);
+	const logout = userStore(store => store.logout);
+	const themeSwitch = appStore(store => store.themeSwitch);
 
 	return (
 		<HeaderStyled>
 			<HeaderLeftMenu>
-				<Button buttonType="text" inline onClick={themeSwitchAction}>
+				<Button buttonType="text" inline onClick={themeSwitch}>
 					{t('DARK')}
 				</Button>
 				<Button inline buttonType="text" active={lang === 'en-US'} onClick={() => i18n.changeLanguage('en-US')}>

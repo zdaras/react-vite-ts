@@ -6,9 +6,7 @@ import { FC } from '@/types';
 
 import { AccordionContainer, AccordionTitle, AccordionContent, AccordionIcon, Line } from './accordion-styled';
 
-export const Accordion: FC<IProps> = ({ children, inBlock = false }) => (
-	<AccordionContainer inBlock={inBlock}>{children}</AccordionContainer>
-);
+export const Accordion: FC<IProps> = ({ children }) => <AccordionContainer>{children}</AccordionContainer>;
 
 export const AccordionSection: FC<ISectionProps> = memo(
 	({ children, title = '', text = '', expanded, withOverflow }) => {
@@ -43,7 +41,6 @@ export const AccordionSection: FC<ISectionProps> = memo(
 );
 
 interface IProps {
-	inBlock?: boolean;
 	children: ReactElement | ReactElement[] | any;
 }
 

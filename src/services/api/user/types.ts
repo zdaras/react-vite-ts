@@ -16,29 +16,8 @@ export interface IRegisterParams {
 	subscribe?: boolean;
 }
 
-export interface IChangePasswordParams extends IOtp {
-	newPassword: string;
-	oldPassword?: string;
-	confirmPassword?: string;
-}
-
-export interface IResendEmailParams {
-	userId?: string;
-}
-
-export interface IUpdateUserInfoParams {
-	fname?: string;
-	lname?: string;
-}
-
 export interface ISendRecoveryEmailParams {
 	username?: string;
-}
-
-export interface IRecoverPasswordParams {
-	key?: string;
-	password?: string;
-	verifiedPassword?: string;
 }
 
 export interface ILogoutParams {

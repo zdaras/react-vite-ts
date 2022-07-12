@@ -2,19 +2,17 @@ import { Link } from '@/components/library/link';
 import { Flex, FlexItem } from '@/styled/flex';
 import { Form, FormInput, ErrorText } from '@/components/form';
 import Button from '@/components/library/button';
-import { BlockStyled, H5, H1 } from '@/styled/shared';
+import { BlockStyled, H5, H1, H4 } from '@/styled/shared';
 import Tooltip from '@/components/library/tooltip';
 import Helmet from '@/components/shared/helmet';
 import { isEmail, isValidPassword } from '@/utils/validator';
-import { userActions } from '@/store/ducks/user';
-import useActions from '@/hooks/useActions';
 import { useTranslation, useApi } from '@/hooks';
 import { IParam } from '@/types';
+import Api from '@/services/api';
 
 const Register = () => {
 	const { t } = useTranslation();
-	const register = useActions(userActions.register);
-	const { call, formError, loading } = useApi(register, undefined, false);
+	const { call, formError, loading, success } = useApi(Api.user.register, { callOnMount: false });
 
 	const onSubmit = async (values: IParam<typeof call>) => call(values);
 
@@ -29,46 +27,56 @@ const Register = () => {
 							const passwordValue = methods.watch('password');
 
 							return (
-								<BlockStyled formPadding>
+								<BlockStyled formPadding transparent={success}>
 									<H1 weight="600" align="center" margin="0 0 50px">
 										{t('Register')}
 									</H1>
 
-									<FormInput name="username" label={t('E-mail Address')} validate={isEmail} />
+									{success ? (
+										<Flex center full>
+											<H4 align="center" margin="0">
+												{t('You registered successfuly. Check your email for additional instructions')}
+											</H4>
+										</Flex>
+									) : (
+										<>
+											<FormInput name="username" label={t('E-mail Address')} validate={isEmail} />
 
-									<FormInput
-										type="password"
-										name="password"
-										label={t('Password')}
-										validate={isValidPassword}
-										AbsoluteComp={
-											<Tooltip
-												text={t(
-													'Password must be at least 8 characters, with at least one lowercase, one uppercase, one number and one symbol.'
-												)}
+											<FormInput
+												type="password"
+												name="password"
+												label={t('Password')}
+												validate={isValidPassword}
+												AbsoluteComp={
+													<Tooltip
+														text={t(
+															'Password must be at least 8 characters, with at least one lowercase, one uppercase, one number and one symbol.'
+														)}
+													/>
+												}
 											/>
-										}
-									/>
 
-									<FormInput
-										type="password"
-										name="confirmPassword"
-										label={t('Confirm Password')}
-										validate={value => (value !== passwordValue ? 'Does not match' : undefined)}
-									/>
+											<FormInput
+												type="password"
+												name="confirmPassword"
+												label={t('Confirm Password')}
+												validate={value => (value !== passwordValue ? 'Does not match' : undefined)}
+											/>
 
-									<ErrorText center formError={formError} />
+											<ErrorText center formError={formError} />
 
-									<Button type="submit" text={t('Sign Up')} loading={loading} />
+											<Button type="submit" text={t('Sign Up')} loading={loading} />
 
-									<Flex center margin="20px 0 0">
-										<H5 align="center" padding="12px 0 0">
-											{t('Already have an account?')}
-										</H5>
-										<Link to="/login">
-											<Button text={t('Log In')} buttonType="text" padding="10px" />
-										</Link>
-									</Flex>
+											<Flex center margin="20px 0 0">
+												<H5 align="center" padding="12px 0 0">
+													{t('Already have an account?')}
+												</H5>
+												<Link to="/login">
+													<Button text={t('Log In')} buttonType="text" padding="10px" />
+												</Link>
+											</Flex>
+										</>
+									)}
 								</BlockStyled>
 							);
 						}}

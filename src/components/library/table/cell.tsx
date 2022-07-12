@@ -12,7 +12,6 @@ export const Cell: FC<IProps> = ({ align, width, children, secondary, onClick })
 
 export interface IProps {
 	align?: 'left' | 'right' | 'center';
-	justify?: 'center' | 'flex-start' | 'flex-end' | 'space-bewteen';
 	width?: string;
 	secondary?: boolean;
 	onClick?: () => any;

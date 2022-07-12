@@ -13,7 +13,7 @@ const decodeWith =
 		pipe(
 			codec.decode(data),
 			E.getOrElseW(errors => {
-				console.error(failure(errors).join('\n'));
+				console.error(failure(errors));
 				return data as any;
 				// throw new Error(failure(errors).join('\n'));
 			})

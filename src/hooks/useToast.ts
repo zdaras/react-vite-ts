@@ -1,11 +1,18 @@
-import useActions from '@/hooks/useActions';
-import toastReducer, { toastActions } from '@/store/ducks/toast';
+import { toastStore } from '@/store/toast';
+import shallow from 'zustand/shallow';
 
 const useToast = () => {
-	const toast = useActions(toastActions);
-	const hideToast = useActions(toastReducer.actions.hideToast);
+	const toast = toastStore(
+		store => ({
+			info: store.info,
+			success: store.success,
+			warning: store.warning,
+			danger: store.danger
+		}),
+		shallow
+	);
 
-	return { toast, hideToast };
+	return { toast };
 };
 
 export default useToast;

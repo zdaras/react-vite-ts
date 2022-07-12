@@ -11,7 +11,7 @@ import { IParam } from '@/types';
 
 const Forgot = () => {
 	const { t } = useTranslation();
-	const { call, formError, loading, success } = useApi(Api.user.sendRecoveryEmail, undefined, false);
+	const { call, formError, loading, success } = useApi(Api.user.sendRecoveryEmail, { callOnMount: false });
 
 	const onSubmit = async (values: IParam<typeof call>) => call(values);
 

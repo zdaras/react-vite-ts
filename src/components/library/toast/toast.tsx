@@ -1,8 +1,6 @@
 import { memo, useState, FC } from 'react';
 
-import useActions from '@/hooks/useActions';
-import toastDuck from '@/store/ducks/toast';
-import { IToast } from '@/store/ducks/toast/toast.types';
+import { toastStore, IToast } from '@/store/toast';
 import timer from '@/utils/timer';
 import { CheckCircle, ErrorOutlineIcon, ExclamationIcon, WarningIcon } from '@/components/icons';
 import { Loading } from '@/components/shared/loading-large';
@@ -13,7 +11,7 @@ import { ToastStyled, ToastIconStyled, ToastTextStyled, ToastTitle } from './toa
 export const Toast: FC<IProps> = ({ toast }) => {
 	const { t } = useTranslation();
 	const [countdown] = useState(toast.timeout || 0);
-	const hideToast = useActions(toastDuck.actions.hideToast);
+	const hideToast = toastStore(store => store.hideToast);
 	const autoHideTimer = timer(toast.autoClose ? () => hideToast(toast) : () => false, countdown);
 	const handleMouseEnter = () => autoHideTimer.pause();
 	const handleMouseLeave = () => autoHideTimer.resume();
