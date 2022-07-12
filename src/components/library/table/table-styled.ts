@@ -28,14 +28,14 @@ export const TableComp = styled.table<ITableProps>`
 			}
 		}
 
-		td:not(:first-child):not(:last-child) {
+		td {
 			padding: 10px;
 		}
 	}
 
 	thead tr td {
 		height: 25px;
-		padding: 2px 0;
+		padding: 2px 10px;
 		color: #c1c1d5;
 		font-size: 14px;
 		border-bottom: 0;

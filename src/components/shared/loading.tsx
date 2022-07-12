@@ -27,7 +27,7 @@ interface IProps {
 Loading.defaultProps = {
 	loading: true,
 	error: false,
-	loadingText: 'Loading..'
+	loadingText: ''
 } as Partial<IProps>;
 
 export default Loading;

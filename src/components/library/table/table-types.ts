@@ -10,7 +10,6 @@ export interface ITableProps<T = IRow> {
 	renderHeader?: (arg1: any) => any;
 	renderBody?: (arg1: T, arg2: number) => any;
 	hoverable?: boolean;
-	scale?: boolean | string;
 	overflow?: string;
 	containerProps?: Record<string, any>;
 }

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { ISectionProps } from '.';
 
-export const AccordionContainer = styled.div<{ inBlock?: boolean }>``;
+export const AccordionContainer = styled.div``;
 
 export const AccordionTitle = styled.div<ISectionProps>`
 	padding: 40px 40px 40px 0;
@@ -44,10 +44,11 @@ export const AccordionContent = styled.div<ISectionProps>`
 	padding: 4px 0;
 
 	:not(:last-child) {
-		border-bottom: 2px solid #eceef3;
+		border-bottom: 1px solid #afafaf;
 	}
 
 	section {
+		padding: 0 0 20px;
 		transition: all 0.2s;
 		opacity: ${props => (props.expanded ? '1' : '0')};
 		visibility: ${props => (props.expanded ? 'visible' : 'hidden')};

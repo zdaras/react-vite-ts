@@ -2,6 +2,4 @@ import { create } from '@storybook/theming';
 
 import logo from './logo.svg';
 
-export default create({
-	brandImage: logo
-});
+export default create({ base: 'light', brandImage: logo });

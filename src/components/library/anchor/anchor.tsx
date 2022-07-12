@@ -8,6 +8,10 @@ export const Anchor: FC<AnchorHTMLAttributes<HTMLAnchorElement> & { text?: strin
 	children,
 	text = '',
 	...props
-}) => <AnchorStyled {...props}>{text || children}</AnchorStyled>;
+}) => (
+	<AnchorStyled target="_blank" rel="noreferrer" {...props}>
+		{text || children}
+	</AnchorStyled>
+);
 
 export default memo(Anchor);

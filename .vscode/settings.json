@@ -22,5 +22,8 @@
 		"source.fixAll.eslint": false
 	},
 	"vitest.commandLine": "npx vitest",
-	"vitest.include": ["**/*.{test,unit}.{js,ts,jsx,tsx}"]
+	"vitest.include": [
+		"**/*.{test,unit}.{js,ts,jsx,tsx}"
+	],
+	"npm-scripts.showStartNotification": false
 }

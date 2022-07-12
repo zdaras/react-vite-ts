@@ -196,7 +196,7 @@ export const H5 = styled.h5<IH>`
 	font-size: 1rem;
 	line-height: 1.125rem;
 	letter-spacing: 0.16px;
-	font-weight: 600;
+	font-weight: 500;
 	color: ${props => props.theme.SECONDARY_FONT_COLOR};
 	opacity: ${props => props.opacity || '0.6'};
 
