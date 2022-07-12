@@ -5,15 +5,15 @@ import { useEffectOnce, useFormError } from '@/hooks';
 import { IError } from '@/types/error';
 
 const useApi = <T extends (...args: any) => any>(asyncFunction: T, config: IConfig<T>): IReturn<T> => {
-	const defaultConfig = { initData: [], initParams: {}, callOnMount: true };
-	const { initData, callOnMount, initParams } = { ...defaultConfig, ...config }; // overwrite default config
-	const [res, setData] = useState(initData);
+	const defaultConfig: IConfig<T> = { data: [], params: {}, callOnMount: true };
+	const { data, callOnMount, params } = { ...defaultConfig, ...config }; // overwrite default config
+	const [res, setData] = useState(data);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 	const [fetched, setFetched] = useState(false);
 	const [fetchCount, setFetchCount] = useState(0);
 	const [requestCount, setRequestCount] = useState(0);
-	const [parameters, setParameters] = useState(initParams);
+	const [parameters, setParameters] = useState(params);
 	const [success, setSuccess] = useState(false);
 	const { formError, setFormError } = useFormError();
 
@@ -26,14 +26,14 @@ const useApi = <T extends (...args: any) => any>(asyncFunction: T, config: IConf
 		});
 	};
 
-	const call = async (par?: IParam<typeof asyncFunction>, ...functionParams: any[]) => {
+	const call = async (newParameters?: IParam<T>) => {
 		try {
 			if (typeof asyncFunction === 'function') {
-				const newParams = par || initParams;
+				const newParams = newParameters || params;
 				setRequestCount(prev => prev + 1);
 				setLoading(true);
 				setParameters(prev => ({ ...prev, ...newParams }));
-				const response: ThenArg<T> = await asyncFunction(newParams, ...functionParams);
+				const response: ThenArg<T> = await asyncFunction(newParams);
 				setError(false);
 				handleFetch(response);
 				setSuccess(true);
@@ -65,7 +65,7 @@ type IReturn<T extends (...args: any) => any> = {
 	data: ThenArg<T>;
 	loading: boolean;
 	error: boolean;
-	call: (...functionParams: Parameters<T>) => Promise<ThenArg<T>>;
+	call: (newParameters?: IParam<T>) => Promise<ThenArg<T>>;
 	fetched: boolean;
 	fetchCount: number;
 	parameters: IParam<T>;
@@ -75,9 +75,9 @@ type IReturn<T extends (...args: any) => any> = {
 };
 
 type IConfig<T extends (...args: any) => any> = {
-	initParams?: IParam<T>;
+	params?: IParam<T>;
 	callOnMount?: boolean;
-	initData?: any;
+	data?: any;
 };
 
 export default useApi;

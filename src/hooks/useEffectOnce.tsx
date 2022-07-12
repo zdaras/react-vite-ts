@@ -1,30 +1,25 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, EffectCallback } from 'react';
 
-const useEffectOnce = (effect: () => any | (() => any)) => {
-	const destroyFunc = useRef<void | (() => void)>();
+const useEffectOnce = (effect: EffectCallback) => {
+	const effectFn = useRef(effect);
+	const destroyFn = useRef<void | (() => void)>();
 	const effectCalled = useRef(false);
-	const renderAfterCalled = useRef(false);
-	const [, setVal] = useState<number>(0);
+	const rendered = useRef(false);
+	const [, refresh] = useState(0);
 
-	if (effectCalled.current) {
-		renderAfterCalled.current = true;
-	}
+	if (effectCalled.current) rendered.current = true;
 
 	useEffect(() => {
 		if (!effectCalled.current) {
-			destroyFunc.current = effect();
+			destroyFn.current = effectFn.current();
 			effectCalled.current = true;
 		}
 
-		setVal(prev => prev + 1);
+		refresh(1);
 
 		return () => {
-			if (!renderAfterCalled.current) {
-				return;
-			}
-			if (destroyFunc.current) {
-				destroyFunc.current();
-			}
+			if (!rendered.current) return;
+			if (destroyFn.current) destroyFn.current();
 		};
 	}, []);
 };
