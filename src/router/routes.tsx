@@ -7,6 +7,7 @@ import Register from '@/pages/register/register';
 import Dashboard from '@/pages/dashboard/dashboard';
 import ForgotPassword from '@/pages/forgot-password/forgot-password';
 import NotFound from '@/pages/not-found';
+import RickAndMorty from '@/pages/rickandmorty/rickandmorty';
 import { FC } from '@/types';
 
 export const routes: IRoute[] = [
@@ -35,6 +36,13 @@ export const routes: IRoute[] = [
 		path: '/',
 		showInMenu: true,
 		Component: Dashboard,
+		Layout: MainLayout,
+		AuthCheck: SkipAuthCheck
+	},
+	{
+		path: '/rickandmorty',
+		showInMenu: true,
+		Component: RickAndMorty,
 		Layout: MainLayout,
 		AuthCheck: SkipAuthCheck
 	},

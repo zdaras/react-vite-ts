@@ -4,5 +4,6 @@ export default {
 	AUTH_TOKEN: import.meta.env.VITE_AUTH_TOKEN,
 	isDev: import.meta.env.VITE_BUILD_MODE === 'development' || !import.meta.env.VITE_BUILD_MODE,
 	isTestBuild: import.meta.env.VITE_BUILD_MODE === 'test',
-	isProd: import.meta.env.VITE_BUILD_MODE === 'production'
+	isProd: import.meta.env.VITE_BUILD_MODE === 'production',
+	GRAPHQL_ENDPOINT: import.meta.env.VITE_GRAPHQL_ENDPOINT
 };

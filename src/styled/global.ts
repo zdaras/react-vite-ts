@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     height: 100%;
+    min-height: 100%;
   }
 
   * {
@@ -191,7 +192,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   [hidden] {
-    display: none !important;
+    opacity: 0;
+    visibility: hidden;
   }
 
   svg:not(.custom) {

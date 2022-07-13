@@ -36,20 +36,26 @@ export const Header: FC = () => {
 				</Button>
 			</HeaderLeftMenu>
 
-			{isLoggedIn ? (
-				<Select borderless padding="0" dropdownType="dropdown" Trigger={UserIcon}>
-					<SelectItem active onClick={logout}>
-						<span style={{ display: 'flex', alignItems: 'center' }}>
-							<span style={{ marginRight: '12px' }}>{t('Logout')}</span>
-							<LogoutIcon />
-						</span>
-					</SelectItem>
-				</Select>
-			) : (
-				<Link to="/login">
-					<Button inline buttonType="text" text="Login" />
+			<div>
+				<Link to="/rickandmorty">
+					<Button inline buttonType="text" text="Rick and Morty" padding="0 20px" />
 				</Link>
-			)}
+
+				{isLoggedIn ? (
+					<Select borderless padding="0" dropdownType="dropdown" Trigger={UserIcon}>
+						<SelectItem active onClick={logout}>
+							<span style={{ display: 'flex', alignItems: 'center' }}>
+								<span style={{ marginRight: '12px' }}>{t('Logout')}</span>
+								<LogoutIcon />
+							</span>
+						</SelectItem>
+					</Select>
+				) : (
+					<Link to="/login">
+						<Button inline buttonType="text" text="Login" />
+					</Link>
+				)}
+			</div>
 		</HeaderStyled>
 	);
 };

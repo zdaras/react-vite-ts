@@ -1,4 +1,4 @@
-import React, { memo, FC, ReactNode, SyntheticEvent } from 'react';
+import { memo, FC, ReactNode, SyntheticEvent } from 'react';
 
 import Icons from '@/components/icons';
 
@@ -19,7 +19,8 @@ export const Button: FC<IProps> = ({
 	fontSize,
 	className,
 	height,
-	margin
+	margin,
+	hidden
 }) => {
 	const Icon = icon ? Icons[icon] : () => null;
 
@@ -28,6 +29,7 @@ export const Button: FC<IProps> = ({
 			type={type}
 			onClick={onClick}
 			active={active}
+			hidden={hidden}
 			disabled={disabled}
 			buttonType={buttonType}
 			inline={inline}
@@ -60,6 +62,7 @@ export interface IProps {
 	className?: string;
 	height?: string;
 	margin?: string;
+	hidden?: boolean;
 }
 
 Button.defaultProps = {

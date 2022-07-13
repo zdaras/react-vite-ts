@@ -78,7 +78,8 @@ export const themes = {
 		type: 'dark',
 		BG_COLOR: '#243b55',
 		HEADER_BG: '#b4cee8',
-		DEFAULT_FONT_COLOR: '#fff'
+		DEFAULT_FONT_COLOR: '#fff',
+		TABLE_COLOR: '#fff'
 	}
 };
 

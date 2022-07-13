@@ -32,3 +32,16 @@ export const decode =
 
 		return decodeWith(c)(response.data);
 	};
+
+export const decodeData = <ApplicationType = any, EncodeTo = ApplicationType>(
+	data: any,
+	c: T.Type<ApplicationType, EncodeTo>,
+	defaultDecode = true
+): T.TypeOf<typeof c> => {
+	if (config.isProd || !defaultDecode) {
+		const resolve: T.TypeOf<typeof c> = data;
+		return resolve;
+	}
+
+	return decodeWith(c)(data);
+};
