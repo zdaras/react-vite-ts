@@ -1,11 +1,15 @@
-import { useQuery, QueryHookOptions } from '@apollo/client';
+import { useQuery, QueryHookOptions, QueryResult, OperationVariables } from '@apollo/client';
 import * as ts from 'io-ts';
 
 import { IParam } from '@/types';
 
 export type IGQuery = IParam<typeof useQuery>;
 
-export type IOpts = QueryHookOptions & { initialData?: any };
+export type IOpts<TData = any, TVariables = OperationVariables> = QueryHookOptions<TData, TVariables> & {
+	initialData?: any;
+};
+
+export type IReturn<T = any, TVariables = OperationVariables> = QueryResult<T, TVariables> & { data: T };
 
 export type ISchema<ApplicationType = any, EncodeTo = ApplicationType, DecodeFrom = unknown> = ts.Type<
 	ApplicationType,

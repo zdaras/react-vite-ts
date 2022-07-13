@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 
 import Modal from '@/components/library/modal';
 import Button from '@/components/library/button';
-import { H5 } from '@/styled/shared';
+import { H5 } from '@/styled/typography';
 import { useTranslation } from '@/hooks';
 
 export const DeleteModal: FC<IProps> = ({ isOpen, closeModal, onDelete, text, autoClose }) => {

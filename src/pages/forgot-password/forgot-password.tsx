@@ -1,5 +1,6 @@
 import { Flex, FlexItem } from '@/styled/flex';
-import { BlockStyled, H1, H4, H5 } from '@/styled/shared';
+import { BlockStyled } from '@/styled/shared';
+import { H1, H4, H5 } from '@/styled/typography';
 import { Form, FormInput, ErrorText } from '@/components/form';
 import { Link } from '@/components/library/link';
 import Button from '@/components/library/button';

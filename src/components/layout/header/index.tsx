@@ -38,9 +38,8 @@ export const Header: FC = () => {
 
 			<div>
 				<Link to="/rickandmorty">
-					<Button inline buttonType="text" text="Rick and Morty" padding="0 20px" />
+					<Button inline buttonType="text" text="Rick and Morty" padding="0 20px 0 0" />
 				</Link>
-
 				{isLoggedIn ? (
 					<Select borderless padding="0" dropdownType="dropdown" Trigger={UserIcon}>
 						<SelectItem active onClick={logout}>

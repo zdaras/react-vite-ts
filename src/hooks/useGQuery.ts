@@ -1,13 +1,21 @@
 import { useQuery } from '@apollo/client';
 import * as ts from 'io-ts';
 
-import type { ISchema, IGQuery, IOpts } from '@/services/graphql/graphql-types';
+import type { ISchema, IGQuery, IOpts, IReturn } from '@/services/graphql/graphql-types';
 import { decodeData } from '@/utils/io-ts';
 
-const useGQuery = <Q extends IGQuery, O extends IOpts, S = ISchema>(query: Q, options: O, schema: ts.Type<S>) => {
-	const hook = useQuery<ts.TypeOf<typeof schema>>(query, { ...options, onCompleted: data => decodeData(data, schema) });
+const useGQuery = <Q extends IGQuery, O extends IOpts, S = ISchema>(
+	query: Q,
+	options: O,
+	schema: ts.Type<S>
+): IReturn<ts.TypeOf<typeof schema>> => {
+	const { initialData = [] } = options;
+	const { data = initialData, ...hook } = useQuery(query, {
+		...options,
+		onCompleted: res => schema && decodeData(res, schema)
+	});
 
-	return hook;
+	return { data, ...hook };
 };
 
 export default useGQuery;

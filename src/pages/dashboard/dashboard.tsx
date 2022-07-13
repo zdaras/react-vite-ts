@@ -1,6 +1,7 @@
 import Helmet from '@/components/shared/helmet';
 import Button from '@/components/library/button';
-import { H4, Container } from '@/styled/shared';
+import { Container } from '@/styled/shared';
+import { H4 } from '@/styled/typography';
 import { Flex } from '@/styled/flex';
 import { numberToFixed } from '@/utils/number';
 import Api from '@/services/api';

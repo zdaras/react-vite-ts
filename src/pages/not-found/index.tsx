@@ -1,5 +1,6 @@
 import { Flex } from '@/styled/flex';
-import { H1, RouteWrapperStyled, NotFoundWrapperStyled } from '@/styled/shared';
+import { RouteWrapperStyled, NotFoundWrapperStyled } from '@/styled/shared';
+import { H1 } from '@/styled/typography';
 import Helmet from '@/components/shared/helmet';
 import { useTranslation } from '@/hooks';
 import { ReactComponent as NotFoundIcon } from '@/assets/icons/404_icon.svg';

@@ -1,17 +1,26 @@
-import { gql, QueryHookOptions } from '@apollo/client';
+import { gql } from '@apollo/client';
 import * as ts from 'io-ts';
+
+import { IOpts } from '@/services/graphql/graphql-types';
 
 interface IGetCharactersParams {
 	page: number;
+	filter: {
+		name: string;
+		status: string;
+		species: string;
+		gender: string;
+	};
 }
 
-const GET_CHARACTERS_OPTIONS: QueryHookOptions = {
+const GET_CHARACTERS_OPTIONS: IOpts = {
+	initialData: { characters: { info: { prev: null, next: null }, results: [] } },
 	variables: { page: 1 } as IGetCharactersParams
 };
 
 const GET_CHARACTERS = gql`
-	query getCharacters($page: Int) {
-		characters(page: $page) {
+	query getCharacters($page: Int, $filter: FilterCharacter) {
+		characters(page: $page, filter: $filter) {
 			info {
 				count
 				pages

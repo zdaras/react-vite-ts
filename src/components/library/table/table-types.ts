@@ -6,9 +6,9 @@ export interface ITableProps<T = IRow> {
 	headers?: IColumn[];
 	data?: T[];
 	showHeader?: boolean;
-	onClick?: (arg1: Record<string, any>, arg2: number) => any | Promise<any>;
-	renderHeader?: (arg1: any) => any;
-	renderBody?: (arg1: T, arg2: number) => any;
+	onClick?: (item: T, index?: number) => any | Promise<any>;
+	renderHeader?: (item: any) => any;
+	renderBody?: (item: T, index: number) => any;
 	hoverable?: boolean;
 	overflow?: string;
 	containerProps?: Record<string, any>;

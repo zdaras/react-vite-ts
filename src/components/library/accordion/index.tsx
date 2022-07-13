@@ -1,6 +1,6 @@
 import { ReactElement, useState, memo, ReactNode } from 'react';
 
-import { H4, H5 } from '@/styled/shared';
+import { H4, H5 } from '@/styled/typography';
 import { Flex } from '@/styled/flex';
 import { FC } from '@/types';
 

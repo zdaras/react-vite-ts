@@ -3,7 +3,7 @@ import { FC, useState } from 'react';
 import Modal from '@/components/library/modal';
 import Button from '@/components/library/button';
 import { ErrorText } from '@/components/form';
-import { H5 } from '@/styled/shared';
+import { H5 } from '@/styled/typography';
 import { useFormError, useTranslation } from '@/hooks';
 
 export const ConfirmModal: FC<IProps> = ({ isOpen, closeModal, closeParentModal, onSubmit, text, autoClose }) => {

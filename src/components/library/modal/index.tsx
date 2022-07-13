@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import { CloseIcon } from '@/components/icons';
-import { H2 } from '@/styled/shared';
+import { H2 } from '@/styled/typography';
 import { FC } from '@/types';
 
 import { ModalBackgroundStyled, ModalBody, ModalTitle, ModalTopPanel, Close } from './modal-styled';
