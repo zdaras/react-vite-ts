@@ -10,10 +10,7 @@ const useGQuery = <Q extends IGQuery, O extends IOpts, S = ISchema>(
 	schema: ts.Type<S>
 ): IReturn<ts.TypeOf<typeof schema>> => {
 	const { initialData = [] } = options;
-	const { data = initialData, ...hook } = useQuery(query, {
-		...options,
-		onCompleted: res => schema && decodeData(res, schema)
-	});
+	const { data = initialData, ...hook } = useQuery(query, { ...options, onCompleted: res => decodeData(res, schema) });
 
 	return { data, ...hook };
 };

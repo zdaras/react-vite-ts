@@ -38,7 +38,7 @@ export const decodeData = <ApplicationType = any, EncodeTo = ApplicationType>(
 	c: T.Type<ApplicationType, EncodeTo>,
 	defaultDecode = true
 ): T.TypeOf<typeof c> => {
-	if (config.isProd || !defaultDecode) {
+	if (config.isProd || !defaultDecode || !c) {
 		const resolve: T.TypeOf<typeof c> = data;
 		return resolve;
 	}
