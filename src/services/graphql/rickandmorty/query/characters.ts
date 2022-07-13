@@ -5,7 +5,7 @@ import { IOpts } from '@/services/graphql/graphql-types';
 
 interface IGetCharactersParams {
 	page: number;
-	filter: {
+	filter?: {
 		name: string;
 		status: string;
 		species: string;
@@ -18,7 +18,7 @@ const GET_CHARACTERS_OPTIONS: IOpts = {
 	variables: { page: 1 } as IGetCharactersParams
 };
 
-const GET_CHARACTERS = gql`
+export const GET_CHARACTERS = gql`
 	query getCharacters($page: Int, $filter: FilterCharacter) {
 		characters(page: $page, filter: $filter) {
 			info {

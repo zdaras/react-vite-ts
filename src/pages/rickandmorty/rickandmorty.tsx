@@ -5,7 +5,7 @@ import Button from '@/components/library/button';
 import { Avatar, Container } from '@/styled/shared';
 import { Flex } from '@/styled/flex';
 import { useTranslation, useGQuery } from '@/hooks';
-import { GET_CHARACTERS_ARGS } from '@/services/graphql/query/rickandmorty';
+import { GET_CHARACTERS_ARGS } from '@/services/graphql/rickandmorty/query';
 
 const RickAndMorty = () => {
 	const { t } = useTranslation();
