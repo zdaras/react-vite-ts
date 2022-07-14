@@ -37,8 +37,8 @@ export const Header: FC = () => {
 			</HeaderLeftMenu>
 
 			<div>
-				<Link to="/rickandmorty">
-					<Button inline buttonType="text" text="Rick and Morty" padding="0 20px 0 0" />
+				<Link to="/posts">
+					<Button inline buttonType="text" text="Posts" padding="0 20px 0 0" />
 				</Link>
 				{isLoggedIn ? (
 					<Select borderless padding="0" dropdownType="dropdown" Trigger={UserIcon}>

@@ -7,7 +7,7 @@ import Register from '@/pages/register/register';
 import Dashboard from '@/pages/dashboard/dashboard';
 import ForgotPassword from '@/pages/forgot-password/forgot-password';
 import NotFound from '@/pages/not-found';
-import RickAndMorty from '@/pages/rickandmorty/rickandmorty';
+import Posts from '@/pages/posts/posts';
 import { FC } from '@/types';
 
 export const routes: IRoute[] = [
@@ -40,9 +40,9 @@ export const routes: IRoute[] = [
 		AuthCheck: SkipAuthCheck
 	},
 	{
-		path: '/rickandmorty',
+		path: '/posts',
 		showInMenu: true,
-		Component: RickAndMorty,
+		Component: Posts,
 		Layout: MainLayout,
 		AuthCheck: SkipAuthCheck
 	},

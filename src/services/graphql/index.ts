@@ -3,12 +3,11 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import config from '@/utils/config';
 
-const authLink = setContext(({ operationName }, { headers }) => {
-	const token = localStorage.getItem('access_token');
+const authLink = setContext((_req, { headers }) => {
+	const token = localStorage.getItem('token');
 	return {
 		headers: {
 			...headers,
-			'x-apollo-operation-name': operationName,
 			...(token && { [config.AUTH_TOKEN]: `Bearer ${token}` })
 		}
 	};

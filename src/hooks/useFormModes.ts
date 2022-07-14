@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react';
 import { IModes, IFormState, IFormReset } from '@/types/form';
 
 const modes: IModes = { create: 'create', edit: 'edit' };
-const initialSelectedItem = (item = {}) => item;
+const initialSelectedItem = (item: Record<string, any> = {}) => item;
 
 const initialState: IFormState = {
 	mode: modes.create,

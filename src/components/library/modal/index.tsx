@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import { CloseIcon } from '@/components/icons';
-import { H2 } from '@/styled/typography';
+import { H3 } from '@/styled/typography';
 import { FC } from '@/types';
 
 import { ModalBackgroundStyled, ModalBody, ModalTitle, ModalTopPanel, Close } from './modal-styled';
@@ -52,7 +52,7 @@ const Modal: FC<IProps> = ({
 					{showTopPanel && (
 						<ModalTopPanel centerTitle={centerTitle}>
 							<ModalTitle>
-								<H2>{title}</H2>
+								<H3>{title}</H3>
 							</ModalTitle>
 							{closeIcon && (
 								<Close onClick={handleClose}>

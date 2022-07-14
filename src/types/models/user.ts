@@ -24,3 +24,8 @@ export type IUser = ts.TypeOf<typeof UserSchema>;
 export const RegisterSchema = ts.string;
 
 export type IRegister = ts.TypeOf<typeof RegisterSchema>;
+
+export const POST_USER_SCHEMA = ts.type({
+	name: ts.string,
+	email: ts.string
+});
