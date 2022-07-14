@@ -3,18 +3,22 @@ import Table, { Row, Cell } from '@/components/library/table';
 import LoadingTable from '@/components/shared/loading-table';
 import Button from '@/components/library/button';
 import Modal from '@/components/library/modal';
+import Accord, { AccordionSection } from '@/components/library/accordion';
 import { FormInput, Form, ErrorText } from '@/components/form';
 import { ReactComponent as PencilIcon } from '@/assets/icons/pencil.svg';
 import { Container } from '@/styled/shared';
 import { Flex } from '@/styled/flex';
-import { useTranslation, useFormModes, useGQuery, useMutation, useToast } from '@/hooks';
+import { H2, H4, H5, H6 } from '@/styled/typography';
+import { useTranslation, useFormModes, useGQuery, useMutation, useToast, useModal } from '@/hooks';
 import { GET_POSTS_ARGS } from '@/services/graphql/posts/query';
 import { ADD_POST_ARGS, IAddPostArgs, UPDATE_POST_ARGS } from '@/services/graphql/posts/mutation';
+import { IPost } from '@/types/models/post';
 
 const Posts = () => {
 	const { t } = useTranslation();
 	const { toast } = useToast();
 	const { state, setItem, handleOpen, handleClose } = useFormModes();
+	const { isOpen, closeModal, openModal, item: selected } = useModal<IPost>();
 	const isEditMode = state.mode === 'edit';
 	const defaultValues = isEditMode ? { title: state.selectedItem.title, body: state.selectedItem.body } : {};
 	const { data, loading, refetch, variables } = useGQuery(...GET_POSTS_ARGS);
@@ -51,7 +55,7 @@ const Posts = () => {
 					</Flex>
 
 					{loading ? (
-						<LoadingTable withCircle padding="10px 0" loading={loading} />
+						<LoadingTable padding="10px 0" loading={loading} />
 					) : (
 						<Table
 							data={data.posts.data}
@@ -59,9 +63,9 @@ const Posts = () => {
 							overflow="auto"
 							renderBody={item => (
 								<Row key={item.id}>
-									<Cell>{item.id}</Cell>
-									<Cell>{item.title}</Cell>
-									<Cell>{item.user.name}</Cell>
+									<Cell onClick={() => openModal(item)}>{item.id}</Cell>
+									<Cell onClick={() => openModal(item)}>{item.title}</Cell>
+									<Cell onClick={() => openModal(item)}>{item.user.name}</Cell>
 									<Cell width="60px">
 										<PencilIcon onClick={() => setItem(item)} />
 									</Cell>
@@ -103,6 +107,29 @@ const Posts = () => {
 						<ErrorText center show={Boolean(error)} text={t('Error')} />
 						<Button type="submit" text={t('Save')} loading={addLoading || updateLoading} />
 					</Form>
+				</Modal>
+			)}
+
+			{isOpen && (
+				<Modal size="large" closeIcon={false} isOpen={isOpen} closeModal={closeModal}>
+					<H2 margin="0 0 20px">{selected.title}</H2>
+					<Flex justify="space-between" padding="0 0 20px">
+						<H6>
+							{t('By ')}
+							<strong>{selected.user?.name}</strong> ({selected.user?.email})
+						</H6>
+					</Flex>
+					<H5>{selected.body}</H5>
+
+					<H4 padding="20px 0 0">{t('Comments:')}</H4>
+
+					<Accord>
+						{selected.comments?.data?.map(comment => (
+							<AccordionSection key={comment.id} title={comment.email}>
+								{comment.body}
+							</AccordionSection>
+						))}
+					</Accord>
 				</Modal>
 			)}
 		</>

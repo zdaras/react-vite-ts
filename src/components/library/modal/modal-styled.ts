@@ -75,6 +75,7 @@ export const ModalBody = styled.div<IModalProps>`
 					 {
 						width: ${({ width }: IModalProps) => width || '60%'};
 						height: ${({ height }) => height || '70%'};
+						max-width: 1000px;
 					}
 				`;
 			case 'default':

@@ -3,19 +3,19 @@ import * as ts from 'io-ts';
 import { POST_COMMENT_SCHEMA } from '@/types/models/comment';
 import { POST_USER_SCHEMA } from '@/types/models/user';
 
+export const POST_SCHEMA = ts.type({
+	id: ts.string,
+	title: ts.string,
+	body: ts.string,
+	user: POST_USER_SCHEMA,
+	comments: ts.type({
+		data: ts.array(POST_COMMENT_SCHEMA)
+	})
+});
+
 export const GET_POSTS_SCHEMA = ts.type({
 	posts: ts.type({
-		data: ts.array(
-			ts.type({
-				id: ts.string,
-				title: ts.string,
-				body: ts.string,
-				user: POST_USER_SCHEMA,
-				comments: ts.type({
-					data: ts.array(POST_COMMENT_SCHEMA)
-				})
-			})
-		),
+		data: ts.array(POST_SCHEMA),
 		links: ts.type({
 			first: ts.union([ts.type({ page: ts.number, limit: ts.number }), ts.null]),
 			prev: ts.union([ts.type({ page: ts.number, limit: ts.number }), ts.null]),
@@ -39,3 +39,5 @@ export const UPDATE_POST_SCHEMA = ts.type({
 		body: ts.string
 	})
 });
+
+export type IPost = ts.TypeOf<typeof POST_SCHEMA>;
