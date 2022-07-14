@@ -1,7 +1,14 @@
-import { useQuery, useMutation, QueryHookOptions, QueryResult, OperationVariables } from '@apollo/client';
+import {
+	useQuery,
+	useMutation,
+	QueryHookOptions,
+	QueryResult,
+	OperationVariables,
+	MutationHookOptions
+} from '@apollo/client';
 import * as ts from 'io-ts';
 
-import { IParam } from '@/types';
+import type { IParam } from '@/types';
 
 export type IGQuery = IParam<typeof useQuery>;
 
@@ -18,3 +25,15 @@ export type ISchema<ApplicationType = any, EncodeTo = ApplicationType, DecodeFro
 	EncodeTo,
 	DecodeFrom
 >;
+
+export type IQuery<Types extends { schema: any }> = {
+	query: IGQuery;
+	options: IOpts;
+	schema: ts.TypeOf<ISchema<Types['schema']>> | any;
+};
+
+export type IMutate<Types extends { schema: any }> = {
+	mutation: IMutation;
+	options: MutationHookOptions;
+	schema: ts.TypeOf<ISchema<Types['schema']>> | any;
+};

@@ -13,6 +13,8 @@ const initialState: IFormState = {
 
 const useFormModes = (defaultValues = initialSelectedItem(), reset?: IFormReset) => {
 	const [state, setState] = useState({ ...initialState, selectedItem: defaultValues });
+	const editMode = state.mode === 'edit';
+	const createMode = state.mode === 'edit';
 
 	const handleOpen = useCallback(() => {
 		setState(prev => ({ ...prev, selectedItem: initialSelectedItem(defaultValues), mode: modes.create, isOpen: true }));
@@ -32,7 +34,7 @@ const useFormModes = (defaultValues = initialSelectedItem(), reset?: IFormReset)
 		setItem(customData || data);
 	}, []);
 
-	return { state, handleOpen, handleClose, setItem, handleItemChange };
+	return { state, handleOpen, handleClose, setItem, handleItemChange, createMode, editMode };
 };
 
 export default useFormModes;

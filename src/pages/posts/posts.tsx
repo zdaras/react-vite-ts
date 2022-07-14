@@ -11,30 +11,30 @@ import { Flex } from '@/styled/flex';
 import { H2, H4, H5, H6 } from '@/styled/typography';
 import { useTranslation, useFormModes, useGQuery, useMutation, useToast, useModal } from '@/hooks';
 import { GET_POSTS_ARGS } from '@/services/graphql/posts/query';
-import { ADD_POST_ARGS, IAddPostArgs, UPDATE_POST_ARGS } from '@/services/graphql/posts/mutation';
-import { IPost } from '@/types/models/post';
+import { ADD_POST_ARGS, UPDATE_POST_ARGS } from '@/services/graphql/posts/mutation';
+import type { IAddPostArgs } from '@/services/graphql/posts/mutation/posts-mutation-types';
+import type { IPost } from '@/types/models/post';
 
 const Posts = () => {
 	const { t } = useTranslation();
 	const { toast } = useToast();
-	const { state, setItem, handleOpen, handleClose } = useFormModes();
+	const { state, setItem, handleOpen, handleClose, editMode } = useFormModes();
 	const { isOpen, closeModal, openModal, item: selected } = useModal<IPost>();
-	const isEditMode = state.mode === 'edit';
-	const defaultValues = isEditMode ? { title: state.selectedItem.title, body: state.selectedItem.body } : {};
-	const { data, loading, refetch, variables } = useGQuery(...GET_POSTS_ARGS);
-	const [addPost, { loading: addLoading, error }] = useMutation(...ADD_POST_ARGS);
-	const [updatePost, { loading: updateLoading }] = useMutation(...UPDATE_POST_ARGS);
+	const defaultValues = editMode ? { title: state.selectedItem.title, body: state.selectedItem.body } : {};
+	const { data, loading, refetch, variables } = useGQuery(GET_POSTS_ARGS);
+	const [addPost, { loading: addLoading, error }] = useMutation(ADD_POST_ARGS);
+	const [updatePost, { loading: updateLoading }] = useMutation(UPDATE_POST_ARGS);
 
-	const handlePrev = (prev: typeof data['posts']['links']['prev']) => {
-		refetch({ options: { ...variables?.options, paginate: prev } });
+	const handlePrev = () => {
+		refetch({ options: { ...variables?.options, paginate: data.posts.links.prev } });
 	};
 
-	const handleNext = (next: typeof data['posts']['links']['next']) => {
-		refetch({ options: { ...variables?.options, paginate: next } });
+	const handleNext = () => {
+		refetch({ options: { ...variables?.options, paginate: data.posts.links.next } });
 	};
 
 	const onSubmit = async (values: IAddPostArgs['input']) => {
-		if (isEditMode) {
+		if (editMode) {
 			await updatePost({ variables: { input: { body: values.body }, id: state.selectedItem.id } });
 			toast.success('Post has been edited');
 		} else {
@@ -55,7 +55,7 @@ const Posts = () => {
 					</Flex>
 
 					{loading ? (
-						<LoadingTable padding="10px 0" loading={loading} />
+						<LoadingTable loading={loading} />
 					) : (
 						<Table
 							data={data.posts.data}
@@ -75,20 +75,8 @@ const Posts = () => {
 					)}
 
 					<Flex justify="space-between" padding="30px 10px 0">
-						<Button
-							inline
-							hidden={!data.posts.links.prev}
-							buttonType="text"
-							text="Prev"
-							onClick={() => handlePrev(data.posts.links.prev)}
-						/>
-						<Button
-							inline
-							hidden={!data.posts.links.next}
-							buttonType="text"
-							text="Next"
-							onClick={() => handleNext(data.posts.links.next)}
-						/>
+						<Button inline hidden={!data.posts.links.prev} buttonType="text" text="Prev" onClick={handlePrev} />
+						<Button inline hidden={!data.posts.links.next} buttonType="text" text="Next" onClick={handleNext} />
 					</Flex>
 				</Flex>
 			</Container>
@@ -99,10 +87,10 @@ const Posts = () => {
 					closeIcon={false}
 					isOpen={state.isOpen}
 					closeModal={handleClose}
-					title={isEditMode ? t('Edit') : t('Add')}
+					title={editMode ? t('Edit') : t('Add')}
 				>
 					<Form onSubmit={onSubmit} defaultValues={defaultValues}>
-						<FormInput name="title" label={t('Title')} readOnly={isEditMode} disabled={isEditMode} />
+						<FormInput name="title" label={t('Title')} readOnly={editMode} disabled={editMode} />
 						<FormInput name="body" label={t('Text')} />
 						<ErrorText center show={Boolean(error)} text={t('Error')} />
 						<Button type="submit" text={t('Save')} loading={addLoading || updateLoading} />

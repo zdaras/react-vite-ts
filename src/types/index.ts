@@ -25,3 +25,5 @@ export interface IOtp {
 export type FC<Props = Record<string, any>> = FunctionComponent<Props & { children?: JSX.Element | ReactNode }>;
 
 export type IParam<T extends (...args: any) => any> = Parameters<T>[0];
+
+export type ValueOf<T> = T[keyof T];
