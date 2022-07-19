@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 
 import { GET_POSTS_SCHEMA } from '@/types/models/post';
+import secondaryClient from '@/services/graphql/secondary';
 
 import { IGetPostsArgs } from './posts-query-types';
 
@@ -47,6 +48,7 @@ export const GET_POSTS_ARGS = {
 		}
 	`,
 	options: {
+		client: secondaryClient,
 		notifyOnNetworkStatusChange: true,
 		initialData: { posts: { data: [], links: { prev: { page: null }, next: { page: null } } } },
 		variables: { options: { paginate: { page: 1, limit: 10 }, sort: { field: 'id', order: 'DESC' } } } as IGetPostsArgs

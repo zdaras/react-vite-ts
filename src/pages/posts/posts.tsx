@@ -46,7 +46,7 @@ const Posts = () => {
 
 	return (
 		<>
-			<Helmet title={t('Rick and Morty')} />
+			<Helmet title={t('Posts')} />
 
 			<Container height="100%">
 				<Flex direction="column">

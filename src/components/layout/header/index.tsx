@@ -34,12 +34,12 @@ export const Header: FC = () => {
 				<Button inline buttonType="text" active={lang === 'ka'} onClick={() => i18n.changeLanguage('ka')}>
 					KA
 				</Button>
+				<Link to="/posts">
+					<Button inline buttonType="text" text="POSTS" padding="0 20px 0 0" />
+				</Link>
 			</HeaderLeftMenu>
 
 			<div>
-				<Link to="/posts">
-					<Button inline buttonType="text" text="Posts" padding="0 20px 0 0" />
-				</Link>
 				{isLoggedIn ? (
 					<Select borderless padding="0" dropdownType="dropdown" Trigger={UserIcon}>
 						<SelectItem active onClick={logout}>

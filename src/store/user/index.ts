@@ -11,6 +11,10 @@ const initialState = { userInfo: null, loading: false, isLoggedIn: false };
 export const userStore = create<IUserStore>(set => ({
 	...initialState,
 
+	success: user => {
+		set({ loading: false, isLoggedIn: true, userInfo: user });
+	},
+
 	logout: () => {
 		const refresh_token: string = storage('refresh_token').get();
 		Api.user.logout({ refresh_token });

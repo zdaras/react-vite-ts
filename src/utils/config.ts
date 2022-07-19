@@ -5,5 +5,6 @@ export default {
 	isDev: import.meta.env.VITE_BUILD_MODE === 'development' || !import.meta.env.VITE_BUILD_MODE,
 	isTestBuild: import.meta.env.VITE_BUILD_MODE === 'test',
 	isProd: import.meta.env.VITE_BUILD_MODE === 'production',
-	GRAPHQL_ENDPOINT: import.meta.env.VITE_GRAPHQL_ENDPOINT
+	GRAPHQL_ENDPOINT: import.meta.env.VITE_GRAPHQL_ENDPOINT,
+	GRAPHQL_ENDPOINT_SECONDARY: import.meta.env.VITE_GRAPHQL_ENDPOINT_SECONDARY
 };

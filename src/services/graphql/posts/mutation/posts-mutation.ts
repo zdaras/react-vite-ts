@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 
 import { ADD_POST_SCHEMA, UPDATE_POST_SCHEMA } from '@/types/models/post';
+import secondaryClient from '@/services/graphql/secondary';
 
 import { GET_POSTS_ARGS } from '../query';
 import type { IAddPostArgs, IUpdatePostArgs } from './posts-mutation-types';
@@ -16,6 +17,7 @@ export const ADD_POST_ARGS = {
 		}
 	`,
 	options: {
+		client: secondaryClient,
 		refetchQueries: [{ query: GET_POSTS_ARGS.query, variables: GET_POSTS_ARGS.options.variables }],
 		variables: {} as IAddPostArgs
 	},
@@ -32,6 +34,7 @@ export const UPDATE_POST_ARGS = {
 		}
 	`,
 	options: {
+		client: secondaryClient,
 		refetchQueries: [{ query: GET_POSTS_ARGS.query, variables: GET_POSTS_ARGS.options.variables }],
 		variables: {} as IUpdatePostArgs
 	},

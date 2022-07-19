@@ -8,6 +8,8 @@ import Dashboard from '@/pages/dashboard/dashboard';
 import ForgotPassword from '@/pages/forgot-password/forgot-password';
 import NotFound from '@/pages/not-found';
 import Posts from '@/pages/posts/posts';
+import AuthPage from '@/pages/auth/auth-page';
+import SignUpPage from '@/pages/signup/signup-page';
 import { FC } from '@/types';
 
 export const routes: IRoute[] = [
@@ -52,6 +54,20 @@ export const routes: IRoute[] = [
 		Component: Dashboard,
 		Layout: MainLayout,
 		AuthCheck: PrivateRoute
+	},
+	{
+		path: '/auth',
+		showInMenu: false,
+		Component: AuthPage,
+		Layout: BlankLayout,
+		AuthCheck: UserIsNotAuth
+	},
+	{
+		path: '/signup',
+		showInMenu: false,
+		Component: SignUpPage,
+		Layout: BlankLayout,
+		AuthCheck: UserIsNotAuth
 	},
 	{
 		path: '*',
