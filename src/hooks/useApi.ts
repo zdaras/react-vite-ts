@@ -26,14 +26,14 @@ const useApi = <T extends (...args: any) => any>(asyncFunction: T, config: IConf
 		});
 	};
 
-	const call = async (newParameters?: IParam<T>) => {
+	const call = async (newParameters?: IParam<T>, ...functionParams: any[]) => {
 		try {
 			if (typeof asyncFunction === 'function') {
 				const newParams = newParameters || params;
 				setRequestCount(prev => prev + 1);
 				setLoading(true);
 				setParameters(prev => ({ ...prev, ...newParams }));
-				const response: ThenArg<T> = await asyncFunction(newParams);
+				const response: ThenArg<T> = await asyncFunction(newParams, ...functionParams);
 				setError(false);
 				handleFetch(response);
 				setSuccess(true);
@@ -65,7 +65,7 @@ type IReturn<T extends (...args: any) => any> = {
 	data: ThenArg<T>;
 	loading: boolean;
 	error: boolean;
-	call: (newParameters?: IParam<T>) => Promise<ThenArg<T>>;
+	call: (...functionParams: Parameters<T>) => Promise<ThenArg<T>>;
 	fetched: boolean;
 	fetchCount: number;
 	parameters: IParam<T>;

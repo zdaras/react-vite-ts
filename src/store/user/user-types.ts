@@ -1,3 +1,4 @@
+import { ILoginParams } from '@/services/api/user/types';
 import { IUser } from '@/types/models/user';
 
 export interface IUserStore {
@@ -7,4 +8,5 @@ export interface IUserStore {
 	error?: boolean;
 	logout: () => void;
 	getCurrentUser: (withLoading?: boolean) => Promise<any>;
+	login: (params: ILoginParams, callback?: () => any) => Promise<any>;
 }

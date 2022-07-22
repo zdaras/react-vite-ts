@@ -8,30 +8,18 @@ import { BlockStyled, H1 } from '@/styled/shared';
 import { Flex, FlexItem } from '@/styled/flex';
 import { required, isEmail } from '@/utils/validator';
 import { userStore } from '@/store/user';
-import { useTranslation, useFormError } from '@/hooks';
+import { useTranslation, useApi } from '@/hooks';
 import { IParam } from '@/types';
-import Api from '@/services/api';
-import { setAuthHeader } from '@/services/api/axios';
 
 const Login = () => {
 	const { t } = useTranslation();
-	const { formError, setFormError } = useFormError();
-	const { state } = useLocation();
 	const navigate = useNavigate();
+	const { state } = useLocation();
 	const redirect = (state as any)?.from?.pathname;
-	const getCurrentUser = userStore(store => store.getCurrentUser);
-	const loading = userStore(store => store.loading);
+	const login = userStore(store => store.login);
+	const { call, loading, formError } = useApi(login, { callOnMount: false });
 
-	const onSubmit = async (values: IParam<typeof Api.user.login>) => {
-		try {
-			const res = await Api.user.login(values);
-			setAuthHeader(res);
-			await getCurrentUser(false);
-			if (redirect) navigate(redirect);
-		} catch (error) {
-			setFormError(error);
-		}
-	};
+	const onSubmit = async (values: IParam<typeof call>) => call(values, () => redirect && navigate(redirect));
 
 	return (
 		<>

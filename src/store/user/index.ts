@@ -8,7 +8,7 @@ import { IUserStore } from './user-types';
 
 const initialState = { userInfo: null, loading: false, isLoggedIn: false };
 
-export const userStore = create<IUserStore>(set => ({
+export const userStore = create<IUserStore>((set, get) => ({
 	...initialState,
 
 	logout: () => {
@@ -31,6 +31,19 @@ export const userStore = create<IUserStore>(set => ({
 		} catch (e) {
 			set(initialState);
 
+			return Promise.reject(e);
+		}
+	},
+
+	login: async (params, callback) => {
+		try {
+			const res = await Api.user.login(params);
+			setAuthHeader(res);
+			await get().getCurrentUser(false);
+			if (typeof callback === 'function') callback();
+
+			return Promise.resolve();
+		} catch (e) {
 			return Promise.reject(e);
 		}
 	}
