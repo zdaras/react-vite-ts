@@ -4,7 +4,7 @@ import { ThenArg, IParam } from '@/types';
 import { useEffectOnce, useFormError } from '@/hooks';
 import { IError } from '@/types/error';
 
-const useApi = <T extends (...args: any) => any>(asyncFunction: T, config: IConfig<T>): IReturn<T> => {
+const useApi = <T extends (...args: any) => any>(asyncFunction: T, config?: IConfig<T>): IReturn<T> => {
 	const defaultConfig: IConfig<T> = { data: [], params: {}, callOnMount: true };
 	const { data, callOnMount, params } = { ...defaultConfig, ...config }; // overwrite default config
 	const [res, setData] = useState(data);
