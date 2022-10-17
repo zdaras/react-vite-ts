@@ -7,7 +7,7 @@ import { ErrorWrapper, ErrorText as Text } from './form-styled';
 
 export const ErrorText: FC<IProps> = ({
 	text = '',
-	formError = { errorDescription: '', params: {} },
+	formError,
 	center = false,
 	margin,
 	show = true,
@@ -16,13 +16,14 @@ export const ErrorText: FC<IProps> = ({
 	inline = false
 }) => {
 	const { t } = useTranslation();
-	const errorMessage = formError.errorDescription || text;
+	const error = formError ?? { errorDescription: '', params: {} };
+	const errorMessage = error.errorDescription || text;
 	const txt = show && errorMessage ? errorMessage : '';
 
 	return (
 		<ErrorWrapper center={center} margin={margin} inForm={inForm} inline={inline} text={txt} role="alert">
 			<Text text={txt} center={center} multiline={multiline} inForm={inForm}>
-				{t(txt, formError.params)}
+				{t(txt, error.params)}
 			</Text>
 		</ErrorWrapper>
 	);
