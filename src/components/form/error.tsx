@@ -30,7 +30,7 @@ export const ErrorText: FC<IProps> = ({
 };
 
 export interface IProps {
-	text?: string;
+	text?: string | any;
 	formError?: IError;
 	center?: boolean;
 	margin?: string;

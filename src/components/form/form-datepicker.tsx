@@ -9,7 +9,7 @@ import ErrorText from './error';
 
 export const FormDatepicker: FC<IProps> = ({ name, margin, padding, validate, showErrorText, ...props }) => {
 	const { formState, control } = useFormContext();
-	const errorText: string | undefined = formState.errors && formState.errors[name]?.message;
+	const errorText = formState.errors && formState.errors[name]?.message;
 
 	return (
 		<FormInputWrapper margin={margin} padding={padding}>

@@ -1,5 +1,3 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-
 import { FormInput, ErrorText, Form } from '@/components/form';
 import { Link } from '@/components/library/link';
 import Button from '@/components/library/button';
@@ -13,13 +11,10 @@ import { IParam } from '@/types';
 
 const Login = () => {
 	const { t } = useTranslation();
-	const navigate = useNavigate();
-	const { state } = useLocation();
-	const redirect = (state as any)?.from?.pathname;
 	const login = userStore(store => store.login);
 	const { call, loading, formError } = useApi(login, { callOnMount: false });
 
-	const onSubmit = async (values: IParam<typeof call>) => call(values, () => redirect && navigate(redirect));
+	const onSubmit = async (values: IParam<typeof call>) => call(values);
 
 	return (
 		<>

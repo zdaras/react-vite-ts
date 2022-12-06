@@ -2,7 +2,7 @@ import React from 'react';
 import { FormProvider, useForm, UseFormReturn } from 'react-hook-form';
 
 const Form = ({ defaultValues = {}, children, onSubmit }: IProps) => {
-	const methods = useForm({ defaultValues });
+	const methods = useForm({ defaultValues, shouldFocusError: false });
 
 	return (
 		<FormProvider {...methods}>

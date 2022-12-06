@@ -17,7 +17,7 @@ export const FormSelect: FC<IProps> = ({
 	...props
 }) => {
 	const { formState, control } = useFormContext();
-	const errorText: string | undefined = formState.errors && formState.errors[name]?.message;
+	const errorText = formState.errors && formState.errors[name]?.message;
 
 	return (
 		<FormInputWrapper margin={margin} padding={padding} hidden={hidden} showErrorText={showErrorText}>

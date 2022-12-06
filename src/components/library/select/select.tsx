@@ -379,7 +379,7 @@ export interface IProps {
 	name?: string;
 	optionsHeight?: string;
 	minWidth?: string;
-	errorText?: string;
+	errorText?: string | any;
 	Trigger?: () => any;
 	withIcon?: boolean;
 	maxWidth?: string;

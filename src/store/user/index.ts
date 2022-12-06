@@ -35,15 +35,15 @@ export const userStore = create<IUserStore>((set, get) => ({
 		}
 	},
 
-	login: async (params, callback) => {
+	login: async params => {
 		try {
 			const res = await Api.user.login(params);
 			setAuthHeader(res);
 			await get().getCurrentUser(false);
-			if (typeof callback === 'function') callback();
 
 			return Promise.resolve();
 		} catch (e) {
+			get().logout();
 			return Promise.reject(e);
 		}
 	}
