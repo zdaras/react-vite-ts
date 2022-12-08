@@ -6,15 +6,15 @@ import { BlockStyled, H5, H1, H4 } from '@/styled/shared';
 import Tooltip from '@/components/library/tooltip';
 import Helmet from '@/components/shared/helmet';
 import { isEmail, isValidPassword } from '@/utils/validator';
-import { useTranslation, useApi } from '@/hooks';
+import { useTranslation, useMutation } from '@/hooks';
 import { IParam } from '@/types';
 import Api from '@/services/api';
 
 const Register = () => {
 	const { t } = useTranslation();
-	const { call, formError, loading, success } = useApi(Api.user.register, { callOnMount: false });
+	const { mutate, error, isLoading, isSuccess } = useMutation(Api.user.register);
 
-	const onSubmit = async (values: IParam<typeof call>) => call(values);
+	const onSubmit = async (values: IParam<typeof mutate>) => mutate(values);
 
 	return (
 		<>
@@ -27,12 +27,12 @@ const Register = () => {
 							const passwordValue = methods.watch('password');
 
 							return (
-								<BlockStyled formPadding transparent={success}>
+								<BlockStyled formPadding transparent={isSuccess}>
 									<H1 weight="600" align="center" margin="0 0 50px">
 										{t('Register')}
 									</H1>
 
-									{success ? (
+									{isSuccess ? (
 										<Flex center full>
 											<H4 align="center" margin="0">
 												{t('You registered successfuly. Check your email for additional instructions')}
@@ -63,9 +63,9 @@ const Register = () => {
 												validate={value => (value !== passwordValue ? 'Does not match' : undefined)}
 											/>
 
-											<ErrorText center formError={formError} />
+											<ErrorText center formError={error} />
 
-											<Button type="submit" text={t('Sign Up')} loading={loading} />
+											<Button type="submit" text={t('Sign Up')} loading={isLoading} />
 
 											<Flex center margin="20px 0 0">
 												<H5 align="center" padding="12px 0 0">

@@ -11,9 +11,9 @@ const initialState = { userInfo: null, loading: false, isLoggedIn: false };
 export const userStore = create<IUserStore>((set, get) => ({
 	...initialState,
 
-	logout: () => {
+	logout: (withRequest = true) => {
 		const refresh_token: string = storage('refresh_token').get();
-		Api.user.logout({ refresh_token });
+		if (withRequest) Api.user.logout({ refresh_token });
 		deleteAuthHeader();
 		set(initialState);
 	},
@@ -43,7 +43,7 @@ export const userStore = create<IUserStore>((set, get) => ({
 
 			return Promise.resolve();
 		} catch (e) {
-			get().logout();
+			get().logout(false);
 			return Promise.reject(e);
 		}
 	}

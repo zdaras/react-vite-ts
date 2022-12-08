@@ -6,15 +6,15 @@ import { BlockStyled, H1 } from '@/styled/shared';
 import { Flex, FlexItem } from '@/styled/flex';
 import { required, isEmail } from '@/utils/validator';
 import { userStore } from '@/store/user';
-import { useTranslation, useApi } from '@/hooks';
+import { useTranslation, useMutation } from '@/hooks';
 import { IParam } from '@/types';
 
 const Login = () => {
 	const { t } = useTranslation();
 	const login = userStore(store => store.login);
-	const { call, loading, formError } = useApi(login, { callOnMount: false });
+	const { mutate, isLoading, error } = useMutation(login);
 
-	const onSubmit = async (values: IParam<typeof call>) => call(values);
+	const onSubmit = async (values: IParam<typeof mutate>) => mutate(values);
 
 	return (
 		<>
@@ -42,9 +42,9 @@ const Login = () => {
 								}
 							/>
 
-							<ErrorText center multiline formError={formError} />
+							<ErrorText center multiline formError={error} />
 
-							<Button type="submit" text={t('Login')} margin="25px 0" loading={loading} />
+							<Button type="submit" text={t('Login')} margin="25px 0" loading={isLoading} />
 
 							<Link to="/register">
 								<Button buttonType="text" text={t('Sign Up')} />

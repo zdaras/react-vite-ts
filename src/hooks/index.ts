@@ -7,3 +7,4 @@ export { default as useViewport } from './useViewport';
 export { default as useTranslation } from './useTranslation';
 export { default as useEffectOnce } from './useEffectOnce';
 export { default as useQuery } from './useQuery';
+export { default as useMutation } from './useMutation';

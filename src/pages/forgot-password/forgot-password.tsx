@@ -5,15 +5,15 @@ import { Link } from '@/components/library/link';
 import Button from '@/components/library/button';
 import Helmet from '@/components/shared/helmet';
 import Api from '@/services/api';
-import { useApi, useTranslation } from '@/hooks';
+import { useTranslation, useMutation } from '@/hooks';
 import { required } from '@/utils/validator';
 import { IParam } from '@/types';
 
 const Forgot = () => {
 	const { t } = useTranslation();
-	const { call, formError, loading, success } = useApi(Api.user.sendRecoveryEmail, { callOnMount: false });
+	const { mutate, isSuccess, isLoading, error } = useMutation(Api.user.sendRecoveryEmail);
 
-	const onSubmit = async (values: IParam<typeof call>) => call(values);
+	const onSubmit = async (values: IParam<typeof mutate>) => mutate(values);
 
 	return (
 		<>
@@ -23,7 +23,7 @@ const Forgot = () => {
 				<FlexItem flex="0 1 600px">
 					<Form onSubmit={onSubmit}>
 						<BlockStyled formPadding height="460px">
-							{success ? (
+							{isSuccess ? (
 								<Flex center full>
 									<H4 align="center" margin="0">
 										{t('Check your email for instructions')}
@@ -41,9 +41,9 @@ const Forgot = () => {
 
 									<FormInput name="username" label="Enter E-mail" validate={required} />
 
-									<ErrorText center formError={formError} />
+									<ErrorText center formError={error} />
 
-									<Button type="submit" text={t('Send E-mail')} loading={loading} />
+									<Button type="submit" text={t('Send E-mail')} loading={isLoading} />
 
 									<Link to="/login">
 										<Button buttonType="text" text={t('Back to Login')} padding="20px" />
