@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, assert, test } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
 
 import '@/services/locale/i18n';
+import ReactQueryProvider from '@/services/react-query/provider';
 
 afterEach(() => {
 	cleanup();
@@ -12,7 +13,11 @@ const customRender = (ui: React.ReactElement, options: RenderOptions = {}) =>
 	render(ui, {
 		// wrap provider(s) here if needed
 		wrapper: ({ children }) => {
-			return <BrowserRouter>{children}</BrowserRouter>;
+			return (
+				<BrowserRouter>
+					<ReactQueryProvider>{children}</ReactQueryProvider>
+				</BrowserRouter>
+			);
 		},
 		...options
 	});
