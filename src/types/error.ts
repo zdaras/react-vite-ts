@@ -1,9 +1,9 @@
-import * as ts from 'io-ts';
+import { Type, Static } from '@sinclair/typebox';
 
-export const IErrorValidator = ts.type({
-	errorCode: ts.union([ts.number, ts.undefined, ts.string]),
-	errorDescription: ts.union([ts.string, ts.undefined]),
-	params: ts.union([ts.undefined, ts.record(ts.string, ts.any)])
+export const IErrorValidator = Type.Object({
+	errorCode: Type.Union([Type.Number(), Type.Undefined(), Type.String()]),
+	errorDescription: Type.Union([Type.String(), Type.Undefined()]),
+	params: Type.Union([Type.Undefined(), Type.Record(Type.String(), Type.Any())])
 });
 
-export type IError = ts.TypeOf<typeof IErrorValidator>;
+export type IError = Static<typeof IErrorValidator>;

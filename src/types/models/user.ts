@@ -1,26 +1,26 @@
-import * as ts from 'io-ts';
+import { Type, Static } from '@sinclair/typebox';
 
-export const LoginSchema = ts.type({
-	access_token: ts.string,
-	expires_in: ts.number,
-	refresh_expires_in: ts.number,
-	refresh_token: ts.string
+export const LoginSchema = Type.Object({
+	access_token: Type.String(),
+	expires_in: Type.Number(),
+	refresh_expires_in: Type.Number(),
+	refresh_token: Type.String()
 });
 
-export type ILoginResponse = ts.TypeOf<typeof LoginSchema>;
+export type ILoginResponse = Static<typeof LoginSchema>;
 
-export const UserSchema = ts.type({
-	id: ts.string,
-	emailVerified: ts.union([ts.boolean, ts.undefined]),
-	username: ts.string,
-	hasTwoFa: ts.boolean,
-	hasTwoFaOnLogin: ts.boolean,
-	fname: ts.union([ts.string, ts.null]),
-	lname: ts.union([ts.string, ts.null])
+export const UserSchema = Type.Object({
+	id: Type.String(),
+	emailVerified: Type.Union([Type.Boolean(), Type.Undefined()]),
+	username: Type.String(),
+	hasTwoFa: Type.Boolean(),
+	hasTwoFaOnLogin: Type.Boolean(),
+	fname: Type.Union([Type.String(), Type.Null()]),
+	lname: Type.Union([Type.String(), Type.Null()])
 });
 
-export type IUser = ts.TypeOf<typeof UserSchema>;
+export type IUser = Static<typeof UserSchema>;
 
-export const RegisterSchema = ts.string;
+export const RegisterSchema = Type.String();
 
-export type IRegister = ts.TypeOf<typeof RegisterSchema>;
+export type IRegister = Static<typeof RegisterSchema>;

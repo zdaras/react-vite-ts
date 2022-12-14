@@ -1,19 +1,19 @@
-import * as ts from 'io-ts';
+import { Type } from '@sinclair/typebox';
 
-export const AssetSchema = ts.type({
-	data: ts.type({
-		changePercent24Hr: ts.string,
-		explorer: ts.string,
-		id: ts.string,
-		marketCapUsd: ts.string,
-		maxSupply: ts.union([ts.null, ts.string]),
-		name: ts.string,
-		priceUsd: ts.string,
-		rank: ts.string,
-		supply: ts.string,
-		symbol: ts.string,
-		volumeUsd24Hr: ts.string,
-		vwap24Hr: ts.string
+export const AssetSchema = Type.Object({
+	data: Type.Object({
+		changePercent24Hr: Type.String(),
+		explorer: Type.String(),
+		id: Type.String(),
+		marketCapUsd: Type.String(),
+		maxSupply: Type.Union([Type.Null(), Type.String()]),
+		name: Type.String(),
+		priceUsd: Type.String(),
+		rank: Type.String(),
+		supply: Type.String(),
+		symbol: Type.String(),
+		volumeUsd24Hr: Type.String(),
+		vwap24Hr: Type.String()
 	}),
-	timestamp: ts.number
+	timestamp: Type.Number()
 });
