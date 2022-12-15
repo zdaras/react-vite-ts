@@ -3,12 +3,12 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import ThemeProvider from '@/styled/theme-provider';
 import ToastContainer from '@/components/library/toast';
 import ErrorBoundary from '@/components/hoc/error-boundary';
-import { appStore } from '@/store/app';
+import { appStore, appSelectors } from '@/store/app';
 import { routes } from '@/router/routes';
 import ReactQueryProvider from '@/services/react-query/provider';
 
 const App = () => {
-	const theme = appStore(state => state.theme);
+	const theme = appStore(appSelectors.theme);
 
 	return (
 		<ErrorBoundary>

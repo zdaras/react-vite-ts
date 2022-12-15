@@ -8,5 +8,5 @@ export interface IUserStore {
 	error?: boolean;
 	logout: (withLoading: boolean) => void;
 	getCurrentUser: (withLoading?: boolean) => Promise<any>;
-	login: (params: ILoginParams, callback?: () => any) => Promise<any>;
+	login: (params: ILoginParams) => Promise<any>;
 }

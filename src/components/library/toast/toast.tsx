@@ -1,6 +1,7 @@
 import { memo, useState, FC } from 'react';
 
-import { toastStore, IToast } from '@/store/toast';
+import { toastStore } from '@/store/toast';
+import type { IToast } from '@/store/toast/toast-types';
 import timer from '@/utils/timer';
 import { CheckCircle, ErrorOutlineIcon, ExclamationIcon, WarningIcon } from '@/components/icons';
 import { Loading } from '@/components/shared/loading-large';

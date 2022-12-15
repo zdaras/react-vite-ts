@@ -7,14 +7,13 @@ import { Flex, FlexItem } from '@/styled/flex';
 import { required, isEmail } from '@/utils/validator';
 import { userStore } from '@/store/user';
 import { useTranslation, useMutation } from '@/hooks';
-import { IParam } from '@/types';
 
 const Login = () => {
 	const { t } = useTranslation();
 	const login = userStore(store => store.login);
 	const { mutate, isLoading, error } = useMutation(login);
 
-	const onSubmit = async (values: IParam<typeof mutate>) => mutate(values);
+	const onSubmit: typeof login = async values => mutate(values);
 
 	return (
 		<>

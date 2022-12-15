@@ -1,8 +1,10 @@
 import create from 'zustand';
 
-import { defaultTheme, IThemeMode } from '@/styled/themes';
+import { defaultTheme } from '@/styled/themes';
 import storage from '@/utils/storage';
 import { userStore } from '@/store/user';
+
+import { IAppStore } from './app-types';
 
 export const appStore = create<IAppStore>((set, get) => ({
 	theme: storage('theme').get() || defaultTheme,
@@ -19,10 +21,6 @@ export const appStore = create<IAppStore>((set, get) => ({
 	}
 }));
 
-export interface IAppStore {
-	theme: IThemeMode;
-	themeSwitch: () => void;
-	initApp: () => void;
-}
+export { appSelectors } from './app-selectors';
 
 export default appStore;

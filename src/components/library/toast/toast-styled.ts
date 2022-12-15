@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { IToast } from '@/store/toast';
+import type { IToast } from '@/store/toast/toast-types';
 import { responsive } from '@/styled/responsive';
 
 interface IToastStyled {
