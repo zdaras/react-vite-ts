@@ -6,7 +6,7 @@ export interface IUserStore {
 	loading?: boolean;
 	isLoggedIn: boolean;
 	error?: boolean;
-	logout: (withLoading: boolean) => void;
+	logout: (withLoading?: boolean) => void;
 	getCurrentUser: (withLoading?: boolean) => Promise<any>;
 	login: (params: ILoginParams) => Promise<any>;
 }

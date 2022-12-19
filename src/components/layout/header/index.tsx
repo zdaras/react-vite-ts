@@ -1,5 +1,3 @@
-import { memo, FC } from 'react';
-
 import Select, { SelectItem } from '@/components/library/select';
 import Button from '@/components/library/button';
 import { Link } from '@/components/library/link';
@@ -16,7 +14,7 @@ const UserIcon = () => (
 	</UserIconStyled>
 );
 
-export const Header: FC = () => {
+export const Header = () => {
 	const { t, i18n, lang } = useTranslation();
 	const isLoggedIn = userStore(userSelectors.isLoggedIn);
 	const logout = userStore(store => store.logout);
@@ -38,7 +36,7 @@ export const Header: FC = () => {
 
 			{isLoggedIn ? (
 				<Select borderless padding="0" dropdownType="dropdown" Trigger={UserIcon}>
-					<SelectItem active onClick={logout}>
+					<SelectItem active onClick={() => logout()}>
 						<span style={{ display: 'flex', alignItems: 'center' }}>
 							<span style={{ marginRight: '12px' }}>{t('Logout')}</span>
 							<LogoutIcon />
@@ -54,4 +52,4 @@ export const Header: FC = () => {
 	);
 };
 
-export default memo(Header);
+export default Header;

@@ -253,6 +253,7 @@ module.exports = {
 		'react/function-component-definition': 0,
 		'react/react-in-jsx-scope': 'off',
 		'react/jsx-no-useless-fragment': 'off',
-		'no-restricted-exports': 'off'
+		'no-restricted-exports': 'off',
+		'react/no-unknown-property': 'off'
 	}
 };

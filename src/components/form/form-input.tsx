@@ -15,12 +15,10 @@ export const FormInput: FC<IProps> = ({
 	validate,
 	pattern,
 	showErrorText,
-	listError,
 	...props
 }) => {
 	const { formState, control } = useFormContext();
-	let errorText = formState.errors?.[name]?.message;
-	if (listError) errorText = formState.errors[listError.name]?.[listError.index]?.[listError.fieldName]?.message;
+	const errorText = formState.errors?.[name]?.message;
 
 	return (
 		<FormInputWrapper margin={margin} padding={padding} showErrorText={showErrorText}>
@@ -46,11 +44,6 @@ export interface IProps extends IInputProps {
 	pattern?: IRegExp;
 	disabled?: boolean;
 	showErrorText?: boolean;
-	listError?: {
-		name: string;
-		index: number;
-		fieldName: string;
-	};
 }
 
 FormInput.defaultProps = {

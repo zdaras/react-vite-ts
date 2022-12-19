@@ -1,13 +1,3 @@
-import queryString from 'query-string';
-
-export const qs = queryString;
-
-export const capitalize = (s: string, lowercase = true) => {
-	if (typeof s !== 'string') return '';
-	const secontPart = lowercase ? s.slice(1).toLowerCase() : s.slice(1);
-	return s.charAt(0).toUpperCase() + secontPart;
-};
-
 export const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const downloadBlobFile = (file: any, filename: string) => {
