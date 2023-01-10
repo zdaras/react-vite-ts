@@ -1,9 +1,7 @@
-import { FC } from 'react';
-
 import { ITableProps } from './table-types';
 import { Cell, Row } from './index';
 
-export const TableBody: FC<ITableProps> = ({ data = [], onClick }) => (
+export const TableBody = ({ data = [], onClick }: ITableProps) => (
 	<>
 		{data.map((item, index) => (
 			<Row key={`data-row-${index}`} onClick={onClick} item={item} index={index}>

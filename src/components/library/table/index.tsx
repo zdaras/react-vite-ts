@@ -3,7 +3,7 @@ import TableBody from './table-body';
 import { ITableProps } from './table-types';
 import { TableComp, TableContainer } from './table-styled';
 
-export function Table<T>({
+export function Table<T extends Record<string, any>>({
 	headers,
 	data,
 	showHeader,
@@ -13,7 +13,7 @@ export function Table<T>({
 	hoverable,
 	overflow,
 	containerProps
-}: IProps<T>) {
+}: ITableProps<T>) {
 	return (
 		<TableContainer overflow={overflow} {...containerProps}>
 			<TableComp hoverable={hoverable}>
@@ -35,8 +35,6 @@ export function Table<T>({
 	);
 }
 
-type IProps<T = Record<string, any>> = ITableProps<T>;
-
 Table.defaultProps = {
 	headers: [],
 	data: [],
@@ -44,7 +42,7 @@ Table.defaultProps = {
 	onClick: () => {},
 	hoverable: true,
 	containerProps: {}
-} as Partial<IProps>;
+} as Partial<ITableProps>;
 
 export { default as Cell } from './cell';
 export { default as Row } from './row';
