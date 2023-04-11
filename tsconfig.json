@@ -42,5 +42,10 @@
       "path": "./tsconfig.node.json"
     }
   ],
-	"types": ["vitest/globals"]
+	"types": ["vitest/globals"],
+	"ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }

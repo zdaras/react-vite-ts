@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 
 import { defaultTheme } from '@/styled/themes';
 import storage from '@/utils/storage';
