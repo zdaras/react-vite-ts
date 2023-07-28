@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 
 import storage from '@/utils/storage';
 import Api from '@/services/api';

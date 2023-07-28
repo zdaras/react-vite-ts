@@ -28,3 +28,4 @@ package-lock.json
 __tests__/e2e/reports/*
 __tests__/e2e/storage-state/*
 __tests__/e2e/static/*
+coverage

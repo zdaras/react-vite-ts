@@ -21,9 +21,11 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": false
 	},
+	"vitest.enable": true,
 	"vitest.commandLine": "npx vitest",
 	"vitest.include": [
 		"**/*.{test,unit}.{js,ts,jsx,tsx}"
 	],
-	"npm-scripts.showStartNotification": false
+	"npm-scripts.showStartNotification": false,
+	"testing.automaticallyOpenPeekView": "never"
 }
